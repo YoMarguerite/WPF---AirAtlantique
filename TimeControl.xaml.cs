@@ -25,19 +25,62 @@ namespace WpfApp1
 
         public TimeControl()
         {
+            Hours = 0;
+            Minutes = 0;
             InitializeComponent();
         }
 
-        private void ChangeMinutes(object sender, RoutedEventArgs e)
+        public string Time
         {
-
+            get { return Hours.ToString() + ":" + Minutes.ToString(); }
         }
 
         private void ChangeHours(object sender, RoutedEventArgs e)
         {
-            
+            if (Numeric(TxtHours.Text))
+            {
+                int verif = int.Parse(TxtHours.Text);
+                if (verif > 23)
+                {
+                    verif = 23;
+                }
+                Hours = verif;
+            }
+            TxtHours.Text = Hours.ToString();
+
         }
 
+        private void ChangeMinutes(object sender, RoutedEventArgs e)
+        {
+            if (Numeric(TxtMinutes.Text))
+            {
+                int verif = int.Parse(TxtMinutes.Text);
+                if (verif > 59)
+                {
+                    verif = 59;
+                }
+                Minutes = verif;
+            }
+            TxtMinutes.Text = Minutes.ToString();
 
+        }
+
+        private bool Numeric(string Receive)
+        {
+            bool Result = false;
+            if (Receive != "")
+            {
+                Result = true;
+                foreach (char Char in Receive)
+                {
+                    if (char.IsDigit(Char) == false)
+                    {
+                        Result = false;
+                    }
+                }
+            }
+                
+            return Result;
+        }
     }
 }

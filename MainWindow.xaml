@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Title="MainWindow" Width="1000" Height="700">
+    
     <DockPanel Name="MainLayout">
 
         <Grid Background="#ef3026" DockPanel.Dock="Top">
@@ -14,12 +15,12 @@
             <Button Name="ConnexionButton" Style="{StaticResource Connexion}" Click="Connexion" ClickMode="Release"/>
 
         </Grid>
+        
         <GroupBox Name="MainBox" Header="Accueil" DockPanel.Dock="Bottom" FontSize="20">
             <DockPanel Name="BoxLayout">
 
             </DockPanel>
         </GroupBox>
         
-
     </DockPanel>
 </Window>

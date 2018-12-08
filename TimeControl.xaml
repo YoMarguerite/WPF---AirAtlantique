@@ -7,43 +7,28 @@
     x:Class="WpfApp1.TimeControl"
 
     Height="Auto" Width="Auto" x:Name="UserControl">
+    
+    <Border CornerRadius="2" BorderBrush="Gray" Background="LightGray" BorderThickness="2">
 
-    <Grid x:Name="LayoutRoot" Width="30" Height="20" Background="White">
+        <StackPanel x:Name="LayoutTimePicker" Orientation="Horizontal" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-        <Grid.ColumnDefinitions>
 
-            <ColumnDefinition Width="12*"/>
+            <TextBox x:Name="TxtHours" MaxLength="2" Width="20" TextChanged="ChangeHours" Text="00"
 
-            <ColumnDefinition Width="3*"/>
+                     TextAlignment="Right" VerticalAlignment="Center"  FontSize="14" BorderBrush="Transparent"/>
 
-            <ColumnDefinition Width="12*"/>
 
-        </Grid.ColumnDefinitions>
+            <TextBlock  x:Name="BlockSeparate" VerticalAlignment="Center" 
 
-        <Grid x:Name="hour" Focusable="True" KeyDown="Down" Grid.ColumnSpan="2" Margin="0,0,0.2,0">
+                    FontSize="14" Text=":" TextAlignment="Center"/>
 
-            <TextBox x:Name="mmTxt" TextWrapping="Wrap" Text="{Binding Path=Hours, ElementName=UserControl, Mode=Default}"
 
-                 TextAlignment="Right" VerticalAlignment="Center"  FontSize="14"/>
+            <TextBox  x:Name="TxtMinutes" MaxLength="2" Width="20" TextChanged="ChangeMinutes" Text="00"
 
-        </Grid>
+                TextAlignment="Right" VerticalAlignment="Center" FontSize="14" BorderBrush="Transparent"/>
 
-        <Grid  Grid.Column="1" Margin="0,0,0.2,0">
-
-            <TextBlock  x:Name="sep1" TextWrapping="Wrap" VerticalAlignment="Center" Background="{x:Null}" 
-
-                  FontSize="14" Text=":" TextAlignment="Center"/>
-
-        </Grid>
-
-        <Grid  Grid.Column="1" x:Name="min" Focusable="True" KeyDown="Down" Grid.ColumnSpan="2" Margin="0,0,-0.2,0">
-
-            <TextBox  x:Name="ddTxt"  TextWrapping="Wrap" Text="{Binding Path=Minutes, ElementName=UserControl, Mode=Default}"
-
-                  TextAlignment="Right" VerticalAlignment="Center" FontSize="14"/>
-
-        </Grid>
-
-    </Grid>
+        </StackPanel>
+        
+     </Border>
 
 </UserControl>
