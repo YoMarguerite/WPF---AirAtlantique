@@ -10,24 +10,29 @@
     
     <Border CornerRadius="2" BorderBrush="Gray" Background="LightGray" BorderThickness="2">
 
-        <StackPanel x:Name="LayoutTimePicker" Orientation="Horizontal" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid x:Name="LayoutTimePicker" Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox x:Name="TxtHours" Grid.Column="0" MaxLength="2" MinWidth="22" TextChanged="ChangeHours" Text="00"
+
+                     TextAlignment="Right" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="Transparent"/>
 
 
-            <TextBox x:Name="TxtHours" MaxLength="2" Width="20" TextChanged="ChangeHours" Text="00"
+            <TextBlock x:Name="BlockSeparate" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
 
-                     TextAlignment="Right" VerticalAlignment="Center"  FontSize="14" BorderBrush="Transparent"/>
-
-
-            <TextBlock  x:Name="BlockSeparate" VerticalAlignment="Center" 
-
-                    FontSize="14" Text=":" TextAlignment="Center"/>
+                     Text=":" TextAlignment="Center"/>
 
 
-            <TextBox  x:Name="TxtMinutes" MaxLength="2" Width="20" TextChanged="ChangeMinutes" Text="00"
+            <TextBox  x:Name="TxtMinutes" Grid.Column="2" MaxLength="2" MinWidth="22" TextChanged="ChangeMinutes" Text="00"
 
-                TextAlignment="Right" VerticalAlignment="Center" FontSize="14" BorderBrush="Transparent"/>
+                TextAlignment="Right" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="Transparent"/>
 
-        </StackPanel>
+        </Grid>
         
      </Border>
 

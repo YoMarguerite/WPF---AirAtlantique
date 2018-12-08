@@ -43,7 +43,7 @@ namespace WpfApp1
             //-----------------Grid Title-----------
             Grid gridtitle = new Grid();
             gridtitle.Children.Add(title);
-            gridtitle.Margin = new Thickness(400, 0, 400, 0);
+            gridtitle.Margin = new Thickness(300, 0, 300, 0);
             DockPanel.SetDock(gridtitle, Dock.Top);
 
             return gridtitle;
@@ -99,6 +99,82 @@ namespace WpfApp1
             return gridpass;
         }
 
+        private Grid Grid_Combo(string str_lbl, string str_txt, List<string> listItems)
+        {
+            //-----------------------Label----------------
+            Label lbl = new Label();
+            lbl.Content = str_lbl;
+            lbl.HorizontalAlignment = HorizontalAlignment.Left;
+
+
+            //---------------------ComboBox-----------------
+            ComboBox combo = new ComboBox();
+            combo.ItemsSource = listItems;
+            combo.Name = str_txt;
+            combo.HorizontalAlignment = HorizontalAlignment.Right;
+            combo.Width = 200;
+
+
+            //-----------------------Grid-----------------
+            Grid grid = new Grid();
+            grid.Children.Add(lbl);
+            grid.Children.Add(combo);
+            grid.Margin = new Thickness(300, 10, 300, 0);
+            DockPanel.SetDock(grid, Dock.Top);
+
+            return grid;
+        }
+
+        private Grid Grid_Time(string str_lbl, string str_txt)
+        {
+            //-----------------------Label----------------
+            Label lbl = new Label();
+            lbl.Content = str_lbl;
+            lbl.HorizontalAlignment = HorizontalAlignment.Left;
+
+
+            //---------------------TextBox-----------------
+            TimeControl txt = new TimeControl();
+            txt.Name = str_txt;
+            txt.HorizontalAlignment = HorizontalAlignment.Right;
+            txt.Width = 200;
+
+
+            //-----------------------Grid-----------------
+            Grid grid = new Grid();
+            grid.Children.Add(lbl);
+            grid.Children.Add(txt);
+            grid.Margin = new Thickness(300, 10, 300, 0);
+            DockPanel.SetDock(grid, Dock.Top);
+
+            return grid;
+        }
+
+        private Grid Grid_Date(string str_lbl, string str_txt)
+        {
+            //-----------------------Label----------------
+            Label lbl = new Label();
+            lbl.Content = str_lbl;
+            lbl.HorizontalAlignment = HorizontalAlignment.Left;
+
+
+            //---------------------TextBox-----------------
+            DatePicker txt = new DatePicker();
+            txt.Name = str_txt;
+            txt.HorizontalAlignment = HorizontalAlignment.Right;
+            txt.Width = 200;
+
+
+            //-----------------------Grid-----------------
+            Grid grid = new Grid();
+            grid.Children.Add(lbl);
+            grid.Children.Add(txt);
+            grid.Margin = new Thickness(300, 10, 300, 0);
+            DockPanel.SetDock(grid, Dock.Top);
+
+            return grid;
+        }
+
         private Grid Grid_Button(string str_content, string str_name)
         {
             //---------------------Button Connexion------------
@@ -139,6 +215,32 @@ namespace WpfApp1
             return grid;
         }
 
+        private Grid Grid_Radio(List<string> listradio, string str_name)
+        {
+            Grid grid = new Grid();
+            grid.Margin = new Thickness(400, 10, 400, 0);
+            DockPanel.SetDock(grid, Dock.Top);
+            RowDefinition rowdef;
+            int index = 0;
+
+            foreach (string radio_content in listradio)
+            {
+                RadioButton radio = new RadioButton();
+                radio.Content = radio_content;
+                radio.Name = str_name;
+
+                rowdef = new RowDefinition();
+                rowdef.Height = new GridLength(30);
+                grid.RowDefinitions.Add(rowdef);
+                Grid.SetRow(radio, index);
+                grid.Children.Add(radio);
+
+                index++;
+            }
+
+            return grid;
+        }
+
         private void Accueil()
         {
             //--------------------MainBox------------------
@@ -146,124 +248,34 @@ namespace WpfApp1
             BoxLayout.Children.Clear();
 
 
-            //------------------Label Départ---------------
-            Label lbldepart = new Label();
-            lbldepart.Content = "Départ :";
-            lbldepart.VerticalAlignment = VerticalAlignment.Center;
-            lbldepart.HorizontalAlignment = HorizontalAlignment.Left;
-
-
             //------------------ComboBox Départ------------
             List<string> listItems = new List<string>();
             listItems.Add("Paris");
             listItems.Add("Nantes");
-            ComboBox depart = new ComboBox();
-            depart.ItemsSource = listItems;
-            depart.VerticalAlignment = VerticalAlignment.Center;
-            depart.HorizontalAlignment = HorizontalAlignment.Left;
-            depart.Margin = new Thickness(80, 0, 0, 0);
-            depart.Width = 100;
-
-
-            //------------------Label Arrivée---------------
-            Label lblarrive = new Label();
-            lblarrive.Content = "Arrivée :";
-            lblarrive.VerticalAlignment = VerticalAlignment.Center;
-            lblarrive.HorizontalAlignment = HorizontalAlignment.Left;
-            lblarrive.Margin = new Thickness(200, 0, 0, 0);
 
 
             //------------------ComboBox Arrivée-------------
             List<string> listItems2 = new List<string>();
             listItems2.Add("Vannes");
             listItems2.Add("Marseille");
-            ComboBox arrive = new ComboBox();
-            arrive.Text = "Destination";
-            arrive.ItemsSource = listItems2;
-            arrive.VerticalAlignment = VerticalAlignment.Center;
-            arrive.HorizontalAlignment = HorizontalAlignment.Left;
-            arrive.Margin = new Thickness(300, 0, 0, 0);
-            arrive.Width = 100;
-
-            //-------------------Button Envoi--------------
-            Button envoi = new Button();
-            envoi.Content = "Recherche";
-            envoi.HorizontalContentAlignment = HorizontalAlignment.Center;
-            envoi.VerticalAlignment = VerticalAlignment.Center;
-            envoi.HorizontalAlignment = HorizontalAlignment.Right;
-            envoi.Margin = new Thickness(0, 0, 10, 0);
 
 
-            //-------------------TopGridBox----------------
-            Grid topgridbox = new Grid();
-            DockPanel.SetDock(topgridbox, Dock.Top);
-            topgridbox.Children.Add(lbldepart);
-            topgridbox.Children.Add(depart);
-            topgridbox.Children.Add(lblarrive);
-            topgridbox.Children.Add(arrive);
-            topgridbox.Children.Add(envoi);
-            topgridbox.Margin = new Thickness(200, 0, 200, 0);
-
-
-            //-------------------LabelHoraire--------------
-            Label lblhoraire = new Label();
-            lblhoraire.Content = "Horaire:";
-            lblhoraire.VerticalAlignment = VerticalAlignment.Center;
-            lblhoraire.HorizontalAlignment = HorizontalAlignment.Left;
-            lblhoraire.Margin = new Thickness(0, 0, 0, 0);
-
-
-            //------------------TimeControl----------------
-            TimeControl time = new TimeControl();
-            time.VerticalAlignment = VerticalAlignment.Center;
-            time.HorizontalAlignment = HorizontalAlignment.Left;
-            time.Margin = new Thickness(80, 0, 0, 0);
-
-
-            //------------------DatePicker----------------
-            DatePicker horaire = new DatePicker();
-            horaire.VerticalAlignment = VerticalAlignment.Center;
-            horaire.HorizontalAlignment = HorizontalAlignment.Left;
-            horaire.Margin = new Thickness(150, 0, 0, 0);
-
-
-            //-------------------RadioButtons--------------
-            RadioButton radio1 = new RadioButton();
-            radio1.Name = "radiotime";
-            radio1.Content = "partir à";
-            RadioButton radio2 = new RadioButton();
-            radio2.Name = "radiotime";
-            radio2.Content = "arrivée à";
-
-
-            //---------------------RadioPanel---------------
-            StackPanel radios = new StackPanel();
-            radios.Children.Add(radio1);
-            radios.Children.Add(radio2);
-            radios.HorizontalAlignment = HorizontalAlignment.Right;
-            radios.Margin = new Thickness(0,0,10,0);
-
-
-            //-------------------MidGridBox----------------
-            Grid midgridbox = new Grid();
-            DockPanel.SetDock(midgridbox, Dock.Top);
-            midgridbox.Children.Add(lblhoraire);
-            midgridbox.Children.Add(time);
-            midgridbox.Children.Add(horaire);
-            midgridbox.Children.Add(radios);
-            midgridbox.Margin = new Thickness(200, 0, 200, 0);
-
-
-            //-------------------BotGridBox----------------
-            Grid botgridbox = new Grid();
-            DockPanel.SetDock(botgridbox, Dock.Bottom);
+            List<string> listradio = new List<string>();
+            listradio.Add("départ à");
+            listradio.Add("arrivé à");
 
 
             //-------------------BoxLayout-----------------
             BoxLayout.Children.Clear();
-            BoxLayout.Children.Add(topgridbox);
-            BoxLayout.Children.Add(midgridbox);
-            BoxLayout.Children.Add(botgridbox);
+            BoxLayout.Children.Add(Grid_Title("RECHERCHER UN VOL"));
+            BoxLayout.Children.Add(Grid_Combo("Départ :", "combdepart", listItems));
+            BoxLayout.Children.Add(Grid_Combo("Arrivée :", "combarrive", listItems2));
+            BoxLayout.Children.Add(Grid_Date("Date :", "date"));
+            BoxLayout.Children.Add(Grid_Time("Heure :", "heure"));
+            BoxLayout.Children.Add(Grid_Radio(listradio, "radio"));
+            BoxLayout.Children.Add(Grid_Button("Recherche", "btnrecherche"));
+            //BoxLayout.Children.Add(midgridbox);
+            //BoxLayout.Children.Add(botgridbox);
         }
 
         private void Accueil(object sender, RoutedEventArgs e)
