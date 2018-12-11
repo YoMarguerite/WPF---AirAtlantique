@@ -33,7 +33,7 @@
                 </MenuItem>
             </Menu>-->
             <Button Name="ConnexionButton" Grid.Column="2" Style="{StaticResource ButtonMenu}" Content="Connexion" Click="Connexion" ClickMode="Release"/>
-            <Button Name="ProfilButton" Grid.Column="3" Style="{StaticResource ButtonMenu}" Content="Profil" Click="Profil" ClickMode="Release"/>
+            <Button Name="ProfilButton" Grid.Column="3" Style="{StaticResource ButtonMenu}" Content="Profil" Click="Profil" ClickMode="Release" Visibility="Collapsed"/>
 
         </Grid>
         

@@ -22,6 +22,7 @@ namespace WpfApp1
     public partial class MainWindow : Window
         {
         static BDD bdd = new BDD();
+        static Utilisateur user;
         static List<object> Actif_Controls = new List<object>();
 
         private delegate void RoutedEventHandler(object sender, RoutedEventArgs e);
@@ -48,6 +49,33 @@ namespace WpfApp1
             DockPanel.SetDock(gridtitle, Dock.Top);
 
             return gridtitle;
+        }
+
+        private Grid Grid_Text(ref TextBox txt, string str_lbl, string str_txt)
+        {
+            //-----------------------Label----------------
+            Label lbl = new Label();
+            lbl.Content = str_lbl;
+            lbl.HorizontalAlignment = HorizontalAlignment.Left;
+
+
+            //---------------------TextBox-----------------
+            txt.Name = str_txt;
+            txt.HorizontalAlignment = HorizontalAlignment.Left;
+            txt.Margin = new Thickness(150, 0, 0, 0);
+            txt.Width = 200;
+
+
+            //-----------------------Grid-----------------
+            Grid grid = new Grid();
+
+
+            grid.Children.Add(lbl);
+            grid.Children.Add(txt);
+            grid.Margin = new Thickness(300, 10, 0, 0);
+            DockPanel.SetDock(grid, Dock.Top);
+
+            return grid;
         }
 
         private Grid Grid_Text(ref TextBox txt, string str_lbl, string str_txt, ref Border borderror, string str_error, string str_error_txt)
@@ -283,6 +311,73 @@ namespace WpfApp1
             return grid;
         }
 
+        private Grid Grid_Block(string str_lbl, string str_txt)
+        {
+            //-----------------------Label----------------
+            Label lbl = new Label();
+            lbl.Content = str_lbl;
+            lbl.HorizontalAlignment = HorizontalAlignment.Left;
+
+
+            //---------------------TextBlock-----------------
+            TextBlock txt = new TextBlock();
+            txt.Text = str_txt;
+            txt.HorizontalAlignment = HorizontalAlignment.Left;
+            txt.Margin = new Thickness(150, 0, 0, 0);
+            txt.Width = 200;
+
+
+            //-----------------------Grid-----------------
+            Grid grid = new Grid();
+
+
+            grid.Children.Add(lbl);
+            grid.Children.Add(txt);
+            grid.Margin = new Thickness(300, 10, 0, 0);
+            DockPanel.SetDock(grid, Dock.Top);
+
+            return grid;
+        }
+
+        private Grid Grid_Block_Modifiable(ref TextBlock txt, string str_lbl, string str_txt, string str_nom, int index)
+        {
+            //-----------------------Label----------------
+            Label lbl = new Label();
+            lbl.Content = str_lbl;
+            lbl.HorizontalAlignment = HorizontalAlignment.Left;
+
+
+            //---------------------TextBlock-----------------
+            txt.Text = str_txt;
+            txt.HorizontalAlignment = HorizontalAlignment.Left;
+            txt.Margin = new Thickness(150, 0, 0, 0);
+            txt.Width = 200;
+
+
+            //---------------------Modifier----------------
+            Button btn = new Button();
+            btn.Content = "modifier";
+            btn.Name = str_nom;
+            btn.Tag = new int[] { index };
+            btn.Click += Modifier_Utilisateur;
+            btn.VerticalAlignment = VerticalAlignment.Top;
+            btn.HorizontalAlignment = HorizontalAlignment.Left;
+            btn.Margin = new Thickness(400, 0, 0, 0);
+
+
+            //-----------------------Grid-----------------
+            Grid grid = new Grid();
+
+
+            grid.Children.Add(lbl);
+            grid.Children.Add(txt);
+            grid.Children.Add(btn);
+            grid.Margin = new Thickness(300, 10, 0, 0);
+            DockPanel.SetDock(grid, Dock.Top);
+
+            return grid;
+        }
+
         private void Accueil()
         {
             //--------------------MainBox------------------
@@ -346,7 +441,7 @@ namespace WpfApp1
             Actif_Controls.Add(passerror);
 
 
-            RoutedEventHandler action = Profil;
+            RoutedEventHandler action = Connexion_Utilisateur;
             RoutedEventHandler action2 = Inscription;
 
             
@@ -370,6 +465,7 @@ namespace WpfApp1
             TextBox prenom = new TextBox();
             Border prenomerror = new Border();
             DatePicker date = new DatePicker();
+            TextBox adresse = new TextBox();
             TextBox mail = new TextBox();
             Border mailerror = new Border();
             TextBox remail = new TextBox();
@@ -387,6 +483,7 @@ namespace WpfApp1
             Actif_Controls.Add(prenom);
             Actif_Controls.Add(prenomerror);
             Actif_Controls.Add(date);
+            Actif_Controls.Add(adresse);
             Actif_Controls.Add(mail);
             Actif_Controls.Add(mailerror);
             Actif_Controls.Add(remail);
@@ -401,6 +498,7 @@ namespace WpfApp1
             BoxLayout.Children.Add(Grid_Text(ref nom, "Nom :", "txtnom", ref nomerror, "errornom", "Champs invalide"));
             BoxLayout.Children.Add(Grid_Text(ref prenom, "Prénom :", "txtprenom", ref prenomerror,  "errorprenom", "Champs invalide"));
             BoxLayout.Children.Add(Grid_Date(ref date, "Naissance :", "date"));
+            BoxLayout.Children.Add(Grid_Text(ref adresse, "Adresse :", "adresse"));
             BoxLayout.Children.Add(Grid_Text(ref mail, "Mail :", "txtmail", ref mailerror, "errormail", "Mail invalide"));
             BoxLayout.Children.Add(Grid_Text(ref remail, "Confirmation :", "txtremail", ref remailerror, "errorremail", "Ne corresponds pas"));
             BoxLayout.Children.Add(Grid_Pass(ref password, "Mot de passe :", "txtpass", ref passworderror, "errorpass", "Mot de passe invalide"));
@@ -411,10 +509,25 @@ namespace WpfApp1
 
         private void Profil(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
+            MainBox.Header = "Profil";
+            BoxLayout.Children.Clear();
+            Actif_Controls.Clear();
 
-            Border mailerror = Actif_Controls[1] as Border;
-            mailerror.Visibility = Visibility.Visible;
+            TextBlock nom = new TextBlock();
+            TextBlock prenom = new TextBlock();
+            TextBlock adresse = new TextBlock();
+            TextBlock mail = new TextBlock();
+            TextBlock naissance = new TextBlock();
+
+            Actif_Controls.Add(nom);
+
+            BoxLayout.Children.Add(Grid_Title("PROFIL"));
+            BoxLayout.Children.Add(Grid_Block_Modifiable(ref nom, "Nom :", user.Nom, "Nom", 0));
+            BoxLayout.Children.Add(Grid_Block_Modifiable(ref prenom, "Prenom :", user.Prenom, "Prenom", 1));
+            BoxLayout.Children.Add(Grid_Block_Modifiable(ref adresse, "Adresse :", user.Adresse, "Adresse", 2));
+            BoxLayout.Children.Add(Grid_Block_Modifiable(ref mail, "Mail :", user.Mail,"Mail", 3));
+            BoxLayout.Children.Add(Grid_Block_Modifiable(ref naissance, "Naissance :", user.Naissance, "Naissance", 4));
+            BoxLayout.Children.Add(Grid_Block("Fidélité :", user.Fidelite + " points"));
 
         }
 
@@ -437,14 +550,15 @@ namespace WpfApp1
             TextBox prenom = (TextBox)Actif_Controls[2];
             Border prenomerror = (Border)Actif_Controls[3];
             DatePicker date = (DatePicker)Actif_Controls[4];
-            TextBox mail = (TextBox)Actif_Controls[5];
-            Border mailerror = (Border)Actif_Controls[6];
-            TextBox remail = (TextBox)Actif_Controls[7];
-            Border remailerror = (Border)Actif_Controls[8];
-            PasswordBox password = (PasswordBox)Actif_Controls[9];
-            Border passworderror = (Border)Actif_Controls[10];
-            PasswordBox repassword = (PasswordBox)Actif_Controls[11];
-            Border repassworderror = (Border)Actif_Controls[12];
+            TextBox adresse = (TextBox)Actif_Controls[5];
+            TextBox mail = (TextBox)Actif_Controls[6];
+            Border mailerror = (Border)Actif_Controls[7];
+            TextBox remail = (TextBox)Actif_Controls[8];
+            Border remailerror = (Border)Actif_Controls[9];
+            PasswordBox password = (PasswordBox)Actif_Controls[10];
+            Border passworderror = (Border)Actif_Controls[11];
+            PasswordBox repassword = (PasswordBox)Actif_Controls[12];
+            Border repassworderror = (Border)Actif_Controls[13];
             
             bool valid = true;
 
@@ -510,8 +624,115 @@ namespace WpfApp1
 
             if (valid)
             {
+                if (IsEmploye(mail.Text))
+                {
+                    
+                }
+                else
+                {
+                    if (!bdd.SelectMail(mail.Text))
+                    {
+                        user = new Utilisateur();
+                        user.Nom = nom.Text;
+                        user.Prenom = prenom.Text;
+                        user.Adresse = adresse.Text;
+                        user.Naissance = date.Text;
+                        user.Mail = mail.Text;
+                        user.Fidelite = 0;
+                        user.ID = bdd.InsertUtilisateur(user, password.Password.ToString());
+
+                        ConnexionButton.Content = "Déconnecter";
+                        ConnexionButton.Click -= Connexion;
+                        ConnexionButton.Click += Deconnexion_Utilisateur;
+                        ProfilButton.Visibility = Visibility.Visible;
+                    }
+                }
                 Accueil();
             }
+        }
+
+        private void Connexion_Utilisateur(object sender, RoutedEventArgs e)
+        {
+            TextBox mail = (TextBox)Actif_Controls[0];
+            Border mailerror = (Border)Actif_Controls[1];
+            PasswordBox password = (PasswordBox)Actif_Controls[2];
+            Border passerror = (Border)Actif_Controls[3];
+
+
+            mailerror.Visibility = Visibility.Collapsed;
+            passerror.Visibility = Visibility.Collapsed;
+
+            if (IsValidEmail(mail.Text))
+            {
+                if (IsEmploye(mail.Text))
+                {
+                    
+                }
+                else
+                {
+                    if (bdd.SelectMotDePasse(mail.Text, password.Password.ToString()))
+                    {
+                        ConnexionButton.Content = "Déconnecter";
+                        ConnexionButton.Click -= Connexion;
+                        ConnexionButton.Click += Deconnexion_Utilisateur;
+                        ProfilButton.Visibility = Visibility.Visible;
+
+                        string info = bdd.SelectUtilisateur(mail.Text);
+                        string[] infos = info.Split(';');
+                        string date = infos[5].Split(' ')[0];
+                        user = new Utilisateur(int.Parse(infos[0]), int.Parse(infos[6]), infos[1], infos[2], infos[3], infos[4], date);
+
+                        Accueil();
+                    }
+                    else
+                    {
+                        passerror.Visibility = Visibility.Visible;
+                    }
+                }
+            }
+            else
+            {
+                mailerror.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void Deconnexion_Utilisateur(object sender, RoutedEventArgs e)
+        {
+            user = null;
+            ConnexionButton.Content = "Connexion";
+            ConnexionButton.Click -= Deconnexion_Utilisateur;
+            ConnexionButton.Click += Connexion;
+            ProfilButton.Visibility = Visibility.Collapsed;
+            Accueil();
+        }
+
+        private void Modifier_Utilisateur(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            btn.Content = "sauvegarder";
+            btn.Click -= Modifier_Utilisateur;
+            btn.Click += Sauvegarder_Utilisateur;
+
+            Grid grid = (Grid)btn.Parent;
+            TextBlock block = (TextBlock)grid.Children[1];            
+
+            TextBox text = new TextBox();
+            text.Text = block.Text;
+            text.HorizontalAlignment = HorizontalAlignment.Left;
+            text.Margin = new Thickness(150, 0, 0, 0);
+            text.Width = 200;
+
+            Actif_Controls.Remove(block);
+            Actif_Controls.Insert((int)btn.Tag, text);
+
+            grid.Children.Remove(block);
+            grid.Children.Insert(1, text);
+        }
+
+        private void Sauvegarder_Utilisateur(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+
         }
 
         private bool IsValidEmail(string email)
@@ -525,6 +746,15 @@ namespace WpfApp1
             {
                 return false;
             }
+        }
+
+        private bool IsEmploye(string email)
+        {
+            if ( email.Split('@')[1] == "airatlantique.fr" )
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

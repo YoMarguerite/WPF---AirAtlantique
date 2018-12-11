@@ -18,8 +18,9 @@ namespace WpfApp1.Class
         private bool disponible;
         private int idDetails;
 
-        public Avion(int nbkm, int moyenne, string pro, string der, bool dispo, int details)
+        public Avion(int id, int nbkm, int moyenne, string pro, string der, bool dispo, int details)
         {
+            setId(id);
             setNbKM(nbkm);
             setMoyenne_kmj(moyenne);
             setPro_maintenance(pro);
@@ -27,6 +28,12 @@ namespace WpfApp1.Class
             setDisponible(dispo);
             setDetails(details);
         }
+
+        public Avion()
+        {
+
+        }
+
 
 //------------------ ID ------------------------
         public int getId()
@@ -39,7 +46,7 @@ namespace WpfApp1.Class
             this.id = nb;
         }
 
-// ----------------- NombreKM---------------------
+// ----------------- NombreKM ---------------------
         public int getNbKM()
         {
             return NombreKM;

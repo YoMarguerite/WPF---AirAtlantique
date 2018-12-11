@@ -21,7 +21,7 @@ namespace WpfApp1.Class
         private void InitConnexion()
         {
             // Création de la chaîne de connexion
-            string connectionString = "SERVER=127.0.0.1; DATABASE=airatlantique; UID=root; PASSWORD=sohcahtoa";
+            string connectionString = "SERVER=127.0.0.1; DATABASE=mydb; UID=root; PASSWORD=sohcahtoa";
             this.connection = new MySqlConnection(connectionString);
         }
 
@@ -126,5 +126,147 @@ namespace WpfApp1.Class
             return "vide";
 
         }
+
+
+        // ----------------------------------------------------------------------------------------------------------------------------------------------
+        // ----------------------------------------------------------------------------------------------------------------------------------------------
+        // ----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+        public int InsertUtilisateur(Utilisateur utilisateur, string MotDePasse)
+        {
+
+            DateTime date;
+
+            if (utilisateur.Naissance != "")
+            {
+                date = DateTime.Parse(utilisateur.Naissance);
+            }
+            else
+            {
+                date = new DateTime();
+            }
+            
+
+            // Ouverture de la connexion SQL
+            this.connection.Open();
+
+            // Création d'une commande SQL en fonction de l'objet connection
+            MySqlCommand cmd = this.connection.CreateCommand();
+
+            // Requête SQL
+            cmd.CommandText = "INSERT INTO clients (Nom, Prenom, Adresse, Mail,  Naissance, Fidelite, Password ) " +
+                "VALUES (@nom, @prenom, @adresse, @mail, @naissance, @fidelite, @motdepasse); SELECT @@Identity";
+
+            // utilisation de l'objet contact passé en paramètre
+            cmd.Parameters.AddWithValue("@nom", utilisateur.Nom);
+            cmd.Parameters.AddWithValue("@prenom", utilisateur.Prenom);
+            cmd.Parameters.AddWithValue("@adresse", utilisateur.Adresse);
+            cmd.Parameters.AddWithValue("@mail", utilisateur.Mail);
+            cmd.Parameters.AddWithValue("@naissance", date);
+            cmd.Parameters.AddWithValue("@fidelite", utilisateur.Fidelite);
+            cmd.Parameters.AddWithValue("@motdepasse", sha256(MotDePasse));
+
+
+
+            // Exécution de la commande SQL
+            object reader = cmd.ExecuteScalar();
+                
+            // Fermeture de la connexion
+            this.connection.Close();
+
+            return int.Parse(reader.ToString());
+
+        }
+
+
+        public string SelectUtilisateur(string mail)
+        {
+            this.connection.Open();
+
+            string result = null;
+
+            // Création d'une commande SQL en fonction de l'objet connection
+            MySqlCommand cmd = this.connection.CreateCommand();
+
+            // Requête SQL
+            cmd.CommandText = "SELECT * from clients where Mail=@mail";
+            cmd.Parameters.AddWithValue("@mail", mail);
+
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    result = reader.GetString(0)+";"+ reader.GetString(1) + ";" + reader.GetString(2) + ";" + reader.GetString(3) 
+                        + ";" + reader.GetString(4) + ";" + reader.GetString(5) + ";" + reader.GetString(6);
+                }
+            }
+
+            return result;
+        }
+
+        public bool SelectMail(string mail)
+        {
+            this.connection.Open();
+
+            // Création d'une commande SQL en fonction de l'objet connection
+            MySqlCommand cmd = this.connection.CreateCommand();
+
+            // Requête SQL
+            cmd.CommandText = "SELECT * from clients where Mail=@mail";
+            cmd.Parameters.AddWithValue("@mail", mail);
+
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            this.connection.Close();
+
+            if (reader.HasRows)
+            {
+                return true;
+            }
+            return false;
+
+        }
+
+        public bool SelectMotDePasse(string mail, string mdp)
+        {
+            this.connection.Open();
+
+            // Création d'une commande SQL en fonction de l'objet connection
+            MySqlCommand cmd = this.connection.CreateCommand();
+
+            // Requête SQL
+            cmd.CommandText = "SELECT Password from Clients where Mail=@mail";
+            cmd.Parameters.AddWithValue("@mail", mail);
+
+            object reader = cmd.ExecuteScalar();
+
+            this.connection.Close();
+
+
+            if ((reader.ToString()) == sha256(mdp))
+            {
+                return true;
+            }
+
+            return false;
+
+        }
+
+
+        public static string sha256(string randomString)
+        {
+            var crypt = new System.Security.Cryptography.SHA256Managed();
+            var hash = new System.Text.StringBuilder();
+            byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(randomString));
+            foreach (byte theByte in crypto)
+            {
+                hash.Append(theByte.ToString("x2"));
+            }
+            return hash.ToString();
+        }
+
     }
 }
