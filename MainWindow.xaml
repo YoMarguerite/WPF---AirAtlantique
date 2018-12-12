@@ -12,28 +12,18 @@
         <Grid Background="#ef3026" DockPanel.Dock="Top" Height="30">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="0.5*"/>
                 <ColumnDefinition Width="0.5*" />
             </Grid.ColumnDefinitions>
 
             <Button Name="AccueilButton" Grid.Column="0" Style="{StaticResource Accueil}" Click="Accueil" ClickMode="Release"/>
-            <!--<Menu Grid.Column="1">
-                <MenuItem Header="_Edit">
-                    <MenuItem Command="ApplicationCommands.Copy"/>
-                    <MenuItem Command="ApplicationCommands.Cut"/>
-                    <MenuItem Command="ApplicationCommands.Paste"/>
-                </MenuItem>
-                <MenuItem Header="_Font">
-                    <MenuItem Header="_Bold" IsCheckable="True"/>
-                    <MenuItem Header="_Italic" IsCheckable="True"/>
-                    <Separator/>
-                    <MenuItem Header="I_ncrease Font Size"/>
-                    <MenuItem Header="_Decrease Font Size"/>
-                </MenuItem>
-            </Menu>-->
-            <Button Name="ConnexionButton" Grid.Column="2" Style="{StaticResource ButtonMenu}" Content="Connexion" Click="Connexion" ClickMode="Release"/>
-            <Button Name="ProfilButton" Grid.Column="3" Style="{StaticResource ButtonMenu}" Content="Profil" Click="Profil" ClickMode="Release" Visibility="Collapsed"/>
+            <Button Name="VolsButton" Grid.Column="1" Style="{StaticResource ButtonMenu}" Content="Vols" Click="Vols" ClickMode="Release" Visibility="Visible"/>
+            <Button Name="MaintenanceButton" Grid.Column="2" Style="{StaticResource ButtonMenu}" Content="Maintenance" Click="Maintenance" ClickMode="Release" Visibility="Visible"/>
+            <Button Name="ConnexionButton" Grid.Column="4" Style="{StaticResource ButtonMenu}" Content="Connexion" Click="Connexion" ClickMode="Release"/>
+            <Button Name="ProfilButton" Grid.Column="5" Style="{StaticResource ButtonMenu}" Content="Profil" Click="Profil" ClickMode="Release" Visibility="Collapsed"/>
 
         </Grid>
         

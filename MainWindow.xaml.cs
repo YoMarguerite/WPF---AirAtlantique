@@ -21,7 +21,7 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
         {
-        static BDD bdd = new BDD();
+        static DAO_Utilisateur bdd_users= new DAO_Utilisateur();
         static Utilisateur user;
         static List<object> Actif_Controls = new List<object>();
 
@@ -218,7 +218,8 @@ namespace WpfApp1
 
             //---------------------DatePicker-----------------
             date.Name = str_txt;
-            date.HorizontalAlignment = HorizontalAlignment.Right;
+            date.HorizontalAlignment = HorizontalAlignment.Left;
+            date.Margin = new Thickness(150, 0, 0, 0);
             date.Width = 200;
 
 
@@ -358,7 +359,7 @@ namespace WpfApp1
             Button btn = new Button();
             btn.Content = "modifier";
             btn.Name = str_nom;
-            btn.Tag = new int[] { index };
+            btn.Tag = index;
             btn.Click += Modifier_Utilisateur;
             btn.VerticalAlignment = VerticalAlignment.Top;
             btn.HorizontalAlignment = HorizontalAlignment.Left;
@@ -374,6 +375,59 @@ namespace WpfApp1
             grid.Children.Add(btn);
             grid.Margin = new Thickness(300, 10, 0, 0);
             DockPanel.SetDock(grid, Dock.Top);
+
+            return grid;
+        }
+
+        private Grid Grid_Table_Page(List<TextBlock> listblocks)
+        {
+            Grid grid = new Grid();
+            grid.Margin = new Thickness(100, 10, 100, 0);
+            DockPanel.SetDock(grid, Dock.Top);
+            ColumnDefinition coldef;
+            RowDefinition rowdef;
+            Border border;
+
+            for (int i = 0; i < 10; i++)
+            {
+                rowdef = new RowDefinition();
+                rowdef.Height = new GridLength(30, GridUnitType.Pixel);
+                grid.RowDefinitions.Add(rowdef);
+
+            }
+
+            for (int i = 0; i < listblocks.Count+1; i++)
+            {
+                coldef = new ColumnDefinition();
+                coldef.Width = new GridLength(1, GridUnitType.Star);
+                grid.ColumnDefinitions.Add(coldef);
+
+                if(i < listblocks.Count)
+                {
+                    border = new Border();
+                    border.BorderBrush = Brushes.Black;
+                    border.BorderThickness = new Thickness(1);
+                    Grid.SetColumn(border, i);
+                    Grid.SetRow(border, 0);
+
+                    border.Child = listblocks[i];
+
+                    grid.Children.Add(border);
+
+                }
+                else
+                {
+                    Button btn = new Button();
+                    btn.Content = "modifier";
+                    Grid.SetColumn(btn, i);
+                    Grid.SetRow(btn, 0);
+                    grid.Children.Add(btn);
+                }
+                
+            }
+
+            
+
 
             return grid;
         }
@@ -516,31 +570,46 @@ namespace WpfApp1
             TextBlock nom = new TextBlock();
             TextBlock prenom = new TextBlock();
             TextBlock adresse = new TextBlock();
-            TextBlock mail = new TextBlock();
-            TextBlock naissance = new TextBlock();
 
             Actif_Controls.Add(nom);
+            Actif_Controls.Add(prenom);
+            Actif_Controls.Add(adresse);
 
             BoxLayout.Children.Add(Grid_Title("PROFIL"));
             BoxLayout.Children.Add(Grid_Block_Modifiable(ref nom, "Nom :", user.Nom, "Nom", 0));
             BoxLayout.Children.Add(Grid_Block_Modifiable(ref prenom, "Prenom :", user.Prenom, "Prenom", 1));
             BoxLayout.Children.Add(Grid_Block_Modifiable(ref adresse, "Adresse :", user.Adresse, "Adresse", 2));
-            BoxLayout.Children.Add(Grid_Block_Modifiable(ref mail, "Mail :", user.Mail,"Mail", 3));
-            BoxLayout.Children.Add(Grid_Block_Modifiable(ref naissance, "Naissance :", user.Naissance, "Naissance", 4));
+            BoxLayout.Children.Add(Grid_Block("Mail :", user.Mail));
+            BoxLayout.Children.Add(Grid_Block("Naissance :", user.Naissance));
             BoxLayout.Children.Add(Grid_Block("Fidélité :", user.Fidelite + " points"));
 
         }
 
-        private void MesVols(object sender, RoutedEventArgs e) { }
-
         private void Maintenance(object sender, RoutedEventArgs e)
         {
             MainBox.Header = "Maintenance";
+            BoxLayout.Children.Clear();
+
+            List<TextBlock> listblocks = new List<TextBlock>();
+            for(int i = 0; i<5; i++)
+            {
+                listblocks.Add(new TextBlock());
+            }
+            listblocks[0].Text = "Avion";
+            listblocks[1].Text = "Cause";
+            listblocks[2].Text = "Tâches";
+            listblocks[3].Text = "Description";
+            listblocks[4].Text = "Date";
+
+            BoxLayout.Children.Add(Grid_Title("Toutes les maintenances"));
+            BoxLayout.Children.Add(Grid_Table_Page(listblocks));
+            BoxLayout.Children.Add(Grid_Title("Hey"));
         }
 
         private void Vols(object sender, RoutedEventArgs e)
         {
             MainBox.Header = "Vols";
+            BoxLayout.Children.Clear();
         }
 
         private void Inscription_Utilisateur(object sender, RoutedEventArgs e)
@@ -630,7 +699,7 @@ namespace WpfApp1
                 }
                 else
                 {
-                    if (!bdd.SelectMail(mail.Text))
+                    if (!bdd_users.SelectMail(mail.Text))
                     {
                         user = new Utilisateur();
                         user.Nom = nom.Text;
@@ -639,7 +708,7 @@ namespace WpfApp1
                         user.Naissance = date.Text;
                         user.Mail = mail.Text;
                         user.Fidelite = 0;
-                        user.ID = bdd.InsertUtilisateur(user, password.Password.ToString());
+                        user.ID = bdd_users.InsertUtilisateur(user, password.Password.ToString());
 
                         ConnexionButton.Content = "Déconnecter";
                         ConnexionButton.Click -= Connexion;
@@ -670,19 +739,28 @@ namespace WpfApp1
                 }
                 else
                 {
-                    if (bdd.SelectMotDePasse(mail.Text, password.Password.ToString()))
+                    if (bdd_users.SelectMotDePasse(mail.Text, password.Password.ToString()))
                     {
                         ConnexionButton.Content = "Déconnecter";
                         ConnexionButton.Click -= Connexion;
                         ConnexionButton.Click += Deconnexion_Utilisateur;
                         ProfilButton.Visibility = Visibility.Visible;
 
-                        string info = bdd.SelectUtilisateur(mail.Text);
-                        string[] infos = info.Split(';');
-                        string date = infos[5].Split(' ')[0];
-                        user = new Utilisateur(int.Parse(infos[0]), int.Parse(infos[6]), infos[1], infos[2], infos[3], infos[4], date);
+                        string info = bdd_users.SelectUtilisateur(mail.Text);
+                        if(info == null)
+                        {
+                            string[] infos = info.Split(';');
+                            string date = infos[5].Split(' ')[0];
+                            user = new Utilisateur(int.Parse(infos[0]), int.Parse(infos[6]), infos[1], infos[2], infos[3], infos[4], date, bool.Parse(infos[7]));
 
-                        Accueil();
+                            Accueil();
+                        }
+                        else
+                        {
+                            passerror.Visibility = Visibility.Visible;
+                            mailerror.Visibility = Visibility.Visible;
+                        }
+                        
                     }
                     else
                     {
@@ -722,8 +800,8 @@ namespace WpfApp1
             text.Margin = new Thickness(150, 0, 0, 0);
             text.Width = 200;
 
-            Actif_Controls.Remove(block);
             Actif_Controls.Insert((int)btn.Tag, text);
+            Actif_Controls.Remove(block);
 
             grid.Children.Remove(block);
             grid.Children.Insert(1, text);
@@ -732,6 +810,62 @@ namespace WpfApp1
         private void Sauvegarder_Utilisateur(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
+            btn.Content = "modifier";
+            btn.Click -= Sauvegarder_Utilisateur;
+            btn.Click += Modifier_Utilisateur;
+
+            Grid grid = (Grid)btn.Parent;
+            TextBox text = (TextBox)grid.Children[1];
+
+            TextBlock block = new TextBlock();
+
+            string info = null;
+            
+            if (text.Text != "")
+            {
+                block.Text = text.Text;
+                if (btn.Name == "Nom")
+                {
+                    bdd_users.UpdateUtilisateurNom(user.ID, text.Text);
+                }
+                else if (btn.Name == "Prenom")
+                {
+                    bdd_users.UpdateUtilisateurPrenom(user.ID, text.Text);
+                }
+                else if (btn.Name == "Adresse")
+                {
+                    bdd_users.UpdateUtilisateurAdresse(user.ID, text.Text);
+                }
+                    
+            }
+            else
+            {
+                if (btn.Name == "Nom")
+                {
+                    info = user.Nom;
+                }
+                else if (btn.Name == "Prenom")
+                {
+                    info = user.Prenom;
+                }
+                else if (btn.Name == "Adresse")
+                {
+                    info = user.Adresse;
+                }
+                block.Text = info;
+            }
+            
+            
+            
+            block.HorizontalAlignment = HorizontalAlignment.Left;
+            block.Margin = new Thickness(150, 0, 0, 0);
+            block.Width = 200;
+
+            Actif_Controls.Remove(text);
+            Actif_Controls.Insert((int)btn.Tag, block);
+
+            grid.Children.Remove(text);
+            grid.Children.Insert(1, block);
 
         }
 

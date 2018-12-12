@@ -17,8 +17,9 @@ namespace WpfApp1.Class
         private string adresse;
         private string mail;
         private string naissance;
+        private bool civilite;
 
-        public Utilisateur(int _id, int _fidelite, string _nom, string _prenom, string _adresse, string _mail, string _naissance)
+        public Utilisateur(int _id, int _fidelite, string _nom, string _prenom, string _adresse, string _mail, string _naissance, bool _civilite)
         {
             this.id = _id;
             this.fidelite = _fidelite;
@@ -26,7 +27,8 @@ namespace WpfApp1.Class
             this.prenom = _prenom;
             this.adresse = _adresse;
             this.mail = _mail;
-            this.naissance = _naissance;            
+            this.naissance = _naissance;
+            this.civilite = _civilite;
         }
 
         public Utilisateur() { }
@@ -73,5 +75,11 @@ namespace WpfApp1.Class
             get { return naissance; }
             set { naissance = value; }
         }
+
+        public bool Civilite {
+            get { return civilite; }
+            set { civilite = value; }
+        }
+
     }
 }

@@ -60,6 +60,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Class\DAO_Avion.cs" />
+    <Compile Include="Class\DAO_Employe.cs" />
+    <Compile Include="Class\DAO_Utilisateur.cs" />
+    <Compile Include="Class\Employe.cs" />
     <Compile Include="Class\Utilisateur.cs" />
     <Compile Include="TimeControl.xaml.cs">
       <DependentUpon>TimeControl.xaml</DependentUpon>
