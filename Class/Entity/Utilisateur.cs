@@ -10,40 +10,30 @@ namespace WpfApp1.Class
     {
 
         //----------------- Variables ------------------
+
         private int id;
-        private int fidelite;
         private string nom;
         private string prenom;
-        private string adresse;
         private string mail;
-        private string naissance;
-        private bool civilite;
+        private string civilite;
+        private bool type;
 
-        public Utilisateur(int _id, int _fidelite, string _nom, string _prenom, string _adresse, string _mail, string _naissance, bool _civilite)
+        public Utilisateur(int _id, string _nom, string _prenom, string _mail, string _civilite, bool _type)
         {
             this.id = _id;
-            this.fidelite = _fidelite;
             this.nom = _nom;
             this.prenom = _prenom;
-            this.adresse = _adresse;
             this.mail = _mail;
-            this.naissance = _naissance;
             this.civilite = _civilite;
+            this.type = _type;
         }
 
         public Utilisateur() { }
 
-
-        public int ID
+        public int Id
         {
             get { return id; }
             set { id = value; }
-        }
-
-        public int Fidelite
-        {
-            get { return fidelite; }
-            set { fidelite = value; }
         }
 
         public string Nom
@@ -58,27 +48,33 @@ namespace WpfApp1.Class
             set { prenom = value; }
         }
 
-        public string Adresse
-        {
-            get { return adresse; }
-            set { adresse = value; }
-        }
-
         public string Mail
         {
             get { return mail; }
             set { mail = value; }
         }
 
-        public string Naissance
-        {
-            get { return naissance; }
-            set { naissance = value; }
-        }
-
-        public bool Civilite {
+        public string Civilite {
             get { return civilite; }
             set { civilite = value; }
+        }
+
+        public bool Type
+        {
+            get { return type; }
+            set { type = value; }
+        }
+
+        public static string sha256(string randomString)
+        {
+            var crypt = new System.Security.Cryptography.SHA256Managed();
+            var hash = new System.Text.StringBuilder();
+            byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(randomString));
+            foreach (byte theByte in crypto)
+            {
+                hash.Append(theByte.ToString("x2"));
+            }
+            return hash.ToString();
         }
 
     }

@@ -6,32 +6,35 @@
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Title="MainWindow" Width="1000" Height="700">
-    
+
     <DockPanel Name="MainLayout">
 
         <Grid Background="#ef3026" DockPanel.Dock="Top" Height="30">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="0.5*" />
-                <ColumnDefinition Width="0.5*" />
                 <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="0.5*"/>
-                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
             <Button Name="AccueilButton" Grid.Column="0" Style="{StaticResource Accueil}" Click="Accueil" ClickMode="Release"/>
             <Button Name="VolsButton" Grid.Column="1" Style="{StaticResource ButtonMenu}" Content="Vols" Click="Vols" ClickMode="Release" Visibility="Visible"/>
-            <Button Name="MaintenanceButton" Grid.Column="2" Style="{StaticResource ButtonMenu}" Content="Maintenance" Click="Maintenance" ClickMode="Release" Visibility="Visible"/>
-            <Button Name="ConnexionButton" Grid.Column="4" Style="{StaticResource ButtonMenu}" Content="Connexion" Click="Connexion" ClickMode="Release"/>
+            <Button Name="MaintenanceButton" Grid.Column="2" Style="{StaticResource ButtonMenu}" Content="Maintenance" Click="Maintenances" ClickMode="Release" Visibility="Visible"/>
+            <Button Name="ClientButton" Grid.Column="3" Style="{StaticResource ButtonMenu}" Content="Clients" Click="Clients" ClickMode="Release" Visibility="Visible"/>
             <Button Name="ProfilButton" Grid.Column="5" Style="{StaticResource ButtonMenu}" Content="Profil" Click="Profil" ClickMode="Release" Visibility="Collapsed"/>
-
+            <Button Name="ConnexionButton" Grid.Column="6" Style="{StaticResource ButtonMenu}" Content="Connexion" Click="Connexion" ClickMode="Release"/>
+            <Button Name="QuitButton" Grid.Column="7" Style="{StaticResource ButtonMenu}" Content="Quitter" Click="Quitter" ClickMode="Release"/>
         </Grid>
-        
+
         <GroupBox Name="MainBox" Header="Accueil" DockPanel.Dock="Bottom" FontSize="20">
             <DockPanel Name="BoxLayout">
-
+                
             </DockPanel>
         </GroupBox>
-        
+
     </DockPanel>
 </Window>

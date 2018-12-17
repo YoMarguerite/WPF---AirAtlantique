@@ -21,7 +21,7 @@ namespace WpfApp1.Class
         private void InitConnexion()
         {
             // Création de la chaîne de connexion
-            string connectionString = "SERVER=127.0.0.1; DATABASE=mydb; UID=root; PASSWORD=sohcahtoa";
+            string connectionString = "SERVER=127.0.0.1; DATABASE=bdd; UID=root; PASSWORD=sohcahtoa";
             this.connection = new MySqlConnection(connectionString);
         }
 

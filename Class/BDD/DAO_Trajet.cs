@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using WpfApp1.Class.Entity;
 
 namespace WpfApp1.Class
 {
-    class DAO_Avion
+    class DAO_Trajet
     {
         private BDD bdd = new BDD();
 
-        public void InsertAvion(Avion avion)
+        public void InsertTrajet(Trajet trajet)
         {
             try
             {
@@ -22,21 +23,17 @@ namespace WpfApp1.Class
                 MySqlCommand cmd = bdd.connection.CreateCommand();
 
                 // Requête SQL
-                cmd.CommandText = "INSERT INTO Avion (NombreKM, Moyenne_km/j, ProchaineMaintenance, DernièreMaintenance, Disponible, idAvionDetails) " +
-                    "VALUES (@nb, @moyenne, @pro_maintenance, @der_maintenance, @disponible, @idDetails); SELECT @@Identity as Id";
+                cmd.CommandText = "INSERT INTO trajet (Duree, Kilometre, depart, arrive) " +
+                    "VALUES (@duree, @kilometre, @depart, @arrive); SELECT @@Identity as Id";
 
                 // utilisation de l'objet contact passé en paramètre
-                cmd.Parameters.AddWithValue("@nb", avion.getNbKM());
-                cmd.Parameters.AddWithValue("@moyenne", avion.getMoyenne_kmj());
-                cmd.Parameters.AddWithValue("@pro_maintenance", avion.getPro_maintenance());
-                cmd.Parameters.AddWithValue("@der_maintenance", avion.getDer_maintenance());
-                cmd.Parameters.AddWithValue("@disponible", avion.getDisponible());
-                cmd.Parameters.AddWithValue("@idDetails", avion.getDetails());
+                cmd.Parameters.AddWithValue("@trajet", trajet.Duree);
+                cmd.Parameters.AddWithValue("@depart", trajet.Kilometre);
+                cmd.Parameters.AddWithValue("@arrive", trajet.Depart);
+                cmd.Parameters.AddWithValue("@modele", trajet.Arrivee);
 
                 // Exécution de la commande SQL
-                MySqlDataReader reader = cmd.ExecuteReader();
-
-                avion.setId(int.Parse(reader["Id"].ToString()));
+                cmd.ExecuteNonQuery();
 
                 // Fermeture de la connexion
                 bdd.connection.Close();
@@ -49,16 +46,17 @@ namespace WpfApp1.Class
             }
         }
 
-        public string SelectAvions()
+        public List<string[]> SelectTrajets()
         {
             bdd.connection.Open();
-            string result = null;
+            List<string[]> results = new List<string[]>();
+            string str_vol = null;
 
             // Création d'une commande SQL en fonction de l'objet connection
             MySqlCommand cmd = bdd.connection.CreateCommand();
 
             // Requête SQL
-            cmd.CommandText = "SELECT * from Avion";
+            cmd.CommandText = "SELECT * from trajet";
 
             MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -66,15 +64,16 @@ namespace WpfApp1.Class
             {
                 while (reader.Read())
                 {
-                    result += reader.GetString(1) + reader.GetString(2) + reader.GetString(3) + reader.GetString(4);
+                    str_vol = reader.GetString(0) + ";" + reader.GetString(1) + ";" + reader.GetString(2) + ";" + reader.GetString(3) + ";" + reader.GetString(4);
+                    results.Add(str_vol.Split(';'));
                 }
             }
 
             bdd.connection.Close();
 
-            return "vide";
+            return results;
 
         }
-        
+
     }
 }

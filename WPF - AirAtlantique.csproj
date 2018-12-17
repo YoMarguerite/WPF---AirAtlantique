@@ -60,11 +60,33 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Class\DAO_Avion.cs" />
-    <Compile Include="Class\DAO_Employe.cs" />
-    <Compile Include="Class\DAO_Utilisateur.cs" />
-    <Compile Include="Class\Employe.cs" />
-    <Compile Include="Class\Utilisateur.cs" />
+    <Compile Include="Class\BDD\DAO_Aeroport.cs" />
+    <Compile Include="Class\BDD\DAO_Maintenance.cs" />
+    <Compile Include="Class\BDD\DAO_Trajet.cs" />
+    <Compile Include="Class\BDD\DAO_Vol.cs" />
+    <Compile Include="Class\Contrôleur\CTRL_Aeroport.cs" />
+    <Compile Include="Class\Contrôleur\CTRL_Avion.cs" />
+    <Compile Include="Class\Contrôleur\CTRL_Employe.cs" />
+    <Compile Include="Class\Contrôleur\CTRL_Client.cs" />
+    <Compile Include="Class\Contrôleur\CTRL_Maintenance.cs" />
+    <Compile Include="Class\Contrôleur\CTRL_Poste.cs" />
+    <Compile Include="Class\Contrôleur\CTRL_Trajet.cs" />
+    <Compile Include="Class\Contrôleur\CTRL_Vol.cs" />
+    <Compile Include="Class\Entity\Aeroport.cs" />
+    <Compile Include="Class\Entity\Client.cs" />
+    <Compile Include="Class\BDD\DAO_Avion.cs" />
+    <Compile Include="Class\BDD\DAO_Employe.cs" />
+    <Compile Include="Class\BDD\DAO_Client.cs" />
+    <Compile Include="Class\BDD\DAO_Poste.cs" />
+    <Compile Include="Class\Entity\Employe.cs" />
+    <Compile Include="Class\Entity\Maintenance.cs" />
+    <Compile Include="Class\Entity\Poste.cs" />
+    <Compile Include="Class\Entity\Trajet.cs" />
+    <Compile Include="Class\Entity\Vol.cs" />
+    <Compile Include="Class\Extensions\BoolExtensions.cs" />
+    <Compile Include="Class\Vue\Graphics_Grid.cs" />
+    <Compile Include="Class\Extensions\StringExtensions.cs" />
+    <Compile Include="Class\Entity\Utilisateur.cs" />
     <Compile Include="TimeControl.xaml.cs">
       <DependentUpon>TimeControl.xaml</DependentUpon>
     </Compile>
@@ -76,8 +98,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Class\Avion.cs" />
-    <Compile Include="Class\BDD.cs" />
+    <Compile Include="Class\Entity\Avion.cs" />
+    <Compile Include="Class\BDD\BDD.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
