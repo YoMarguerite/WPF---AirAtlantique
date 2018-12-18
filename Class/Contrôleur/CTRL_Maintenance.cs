@@ -76,6 +76,12 @@ namespace WpfApp1.Class.Contrôleur
             bdd_maintenance.UpdateAeroport(maintenance.Id, aeroport.Id);
         }
 
+        public void Supprimer(int id)
+        {
+            maintenances.Remove(Find(id));
+            bdd_maintenance.Delete(id);
+        }
+
 
         public Maintenance Find(int id)
         {

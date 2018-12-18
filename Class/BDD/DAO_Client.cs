@@ -236,6 +236,22 @@ namespace WpfApp1.Class
             bdd.connection.Close();
         }
 
+        public void Delete(int id)
+        {
+            bdd.connection.Open();
+
+            // Création d'une commande SQL en fonction de l'objet connection
+            MySqlCommand cmd = bdd.connection.CreateCommand();
+
+            // Requête SQL
+            cmd.CommandText = "DELETE FROM client WHERE idclient=@id";
+            cmd.Parameters.AddWithValue("@id", id);
+
+            cmd.ExecuteNonQuery();
+
+            bdd.connection.Close();
+        }
+
     }
 }
 

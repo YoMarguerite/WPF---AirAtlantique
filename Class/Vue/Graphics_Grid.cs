@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -363,6 +364,8 @@ namespace WpfApp1.Class
         public static DataGrid DataGrid<T>(ObservableCollection<T> collection, List<string> data, EventHandler<DataGridCellEditEndingEventArgs> action)
         {
             DataGrid grid = new DataGrid();
+            grid.CanUserAddRows = false;
+            grid.CanUserDeleteRows = false;
             grid.AutoGenerateColumns = false;
             grid.CellEditEnding += action;
             grid.ItemsSource = collection;
@@ -389,6 +392,30 @@ namespace WpfApp1.Class
             coldef.ItemsSource = combo;
             coldef.SelectedValueBinding = new Binding(bind);
             coldef.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            return coldef;
+        }
+
+        public static DataGridTemplateColumn Column(string header, string content, RoutedEventHandler action, RoutedEventHandler action2)
+        {
+            DataGridTemplateColumn coldef = new DataGridTemplateColumn { Header = header };
+            coldef.Width = new DataGridLength(1, DataGridLengthUnitType.SizeToCells);
+
+            DataTemplate data = new DataTemplate();
+
+            FrameworkElementFactory panel = new FrameworkElementFactory(typeof(StackPanel));
+            panel.SetValue(StackPanel.OrientationProperty, Orientation.Horizontal);
+
+
+            FrameworkElementFactory btn = new FrameworkElementFactory(typeof(Button));
+            btn.SetValue(Button.ContentProperty, content);
+            btn.SetBinding(Button.CommandParameterProperty, new Binding("Id"));
+            btn.AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler(action));
+            btn.AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler(action2));
+            panel.AppendChild(btn);
+
+            data.VisualTree = panel;
+            coldef.CellTemplate = data;
+
             return coldef;
         }
     }

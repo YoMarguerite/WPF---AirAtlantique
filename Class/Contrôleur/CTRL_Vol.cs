@@ -89,5 +89,12 @@ namespace WpfApp1.Class.Contrôleur
 
             return default(Vol);
         }
+
+
+        public void Supprimer(int id)
+        {
+            vols.Remove(Find(id));
+            bdd_vol.Delete(id);
+        }
     }
 }

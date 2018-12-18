@@ -98,6 +98,20 @@ namespace WpfApp1.Class.Contrôleur
         }
 
 
+        public Client Find(int id)
+        {
+            for (int i = 0; i < clients.Count; i++)
+            {
+                if (clients[i].Id == id)
+                {
+                    return clients[i];
+                }
+            }
+
+            return default(Client);
+        }
+
+
         public Client FindbyMail(string mail)
         {
             for (int i = 0; i < clients.Count; i++)
@@ -116,6 +130,13 @@ namespace WpfApp1.Class.Contrôleur
         {
             clients.Add(client);
             client.Id = bdd_client.InsertClient(client, mdp);
+        }
+
+
+        public void Supprimer(int id)
+        {
+            clients.Remove(Find(id));
+            bdd_client.Delete(id);
         }
 
 

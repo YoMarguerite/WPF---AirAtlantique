@@ -549,6 +549,7 @@ namespace WpfApp1
         {
             MainBox.Header = "Maintenance";
             BoxLayout.Children.Clear();
+            Actif_Controls.Clear();
 
             List<string> header = new List<string> { "Date", "Details", "Avion", "Aeroport" };
             DataGrid datagrid = Graphics_Grid.DataGrid<Maintenance>(maintenances.DataMaintenances, header, CellEditEndingMaintenance);
@@ -556,6 +557,9 @@ namespace WpfApp1
             datagrid.Columns.Add(Graphics_Grid.Column(header[1]));
             datagrid.Columns.Add(Graphics_Grid.Column(header[2], "Avion", avions.Matricule));
             datagrid.Columns.Add(Graphics_Grid.Column(header[3], "Aeroport", aeroports.AITA));
+            datagrid.Columns.Add(Graphics_Grid.Column("", "Supprimer", SupprimerMaintenance, Maintenances));
+
+            Actif_Controls.Add(datagrid);
 
             BoxLayout.Children.Add(Graphics_Grid.Grid_Title("Maintenances"));
             BoxLayout.Children.Add(datagrid);
@@ -572,6 +576,8 @@ namespace WpfApp1
             datagrid.Columns.Add(Graphics_Grid.Column(header[1]));
             datagrid.Columns.Add(Graphics_Grid.Column(header[2], "Trajet_Str",trajets.Trajets_Str));
             datagrid.Columns.Add(Graphics_Grid.Column(header[3], "Avion", avions.Matricule));
+            datagrid.Columns.Add(Graphics_Grid.Column("", "Supprimer", SupprimerVol, Vols));
+
 
             BoxLayout.Children.Add(Graphics_Grid.Grid_Title("Vols"));
             BoxLayout.Children.Add(datagrid);
@@ -589,6 +595,7 @@ namespace WpfApp1
             datagrid.Columns.Add(Graphics_Grid.Column(header[2]));
             datagrid.Columns.Add(Graphics_Grid.Column(header[3], "Civilite", new List<string> { "Homme", "Femme" }));
             datagrid.Columns.Add(Graphics_Grid.Column(header[4]));
+            datagrid.Columns.Add(Graphics_Grid.Column("", "Supprimer", SupprimerClient, Clients));
 
 
             BoxLayout.Children.Add(Graphics_Grid.Grid_Title("Clients"));
@@ -652,6 +659,10 @@ namespace WpfApp1
                             default:
                                 break;
                         }
+                    }
+                    else
+                    {
+
                     }
 
                 }
@@ -758,6 +769,24 @@ namespace WpfApp1
                     }
                 }
             }
+        }
+
+        private void SupprimerMaintenance(object sender, RoutedEventArgs e)
+        {
+            int id = int.Parse(((Button)sender).CommandParameter.ToString());
+            maintenances.Supprimer(id);
+        }
+
+        private void SupprimerVol(object sender, RoutedEventArgs e)
+        {
+            int id = int.Parse(((Button)sender).CommandParameter.ToString());
+            vols.Supprimer(id);
+        }
+
+        private void SupprimerClient(object sender, RoutedEventArgs e)
+        {
+            int id = int.Parse(((Button)sender).CommandParameter.ToString());
+            clients.Supprimer(id);
         }
 
         private void Quitter(object sender, RoutedEventArgs e)
