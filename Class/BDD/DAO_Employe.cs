@@ -89,10 +89,12 @@ namespace WpfApp1.Class
 
             bdd.connection.Close();
 
-
-            if ((reader.ToString()) == Utilisateur.sha256(mdp))
+            if(reader != null)
             {
-                return true;
+                if ((reader.ToString()) == Utilisateur.sha256(mdp))
+                {
+                    return true;
+                }
             }
 
             return false;

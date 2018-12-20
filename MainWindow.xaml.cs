@@ -165,7 +165,6 @@ namespace WpfApp1
             }
         }
 
-
         private void CellEditEndingBillet(object sender, DataGridCellEditEndingEventArgs e)
         {
             if (e.EditAction == DataGridEditAction.Commit)
@@ -394,7 +393,7 @@ namespace WpfApp1
                         employe.Prenom = prenom.Text;
                         employe.Mail = mail.Text;
                         employe.Civilite = civilite.Text;
-                        employe.Poste = "Nouveau";
+                        employe.Poste = "indéfinis";
                         employe.Type = true;
 
                         employes.AjouterEmploye(ref employe, password.Password.ToString());
