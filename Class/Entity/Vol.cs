@@ -15,16 +15,19 @@ namespace WpfApp1.Class.Entity
         private string depart;
         private string arrivee;
         private string avion;
+        private List<double[]> prix;
 
-        public Vol(int _id, Trajet _trajet, string _depart, string _arrivee, Avion _avion)
+
+        public Vol(int _id, Trajet _trajet, string _depart, string _arrivee, Avion _avion, List<double[]> _prix)
         {
             this.id = _id;
-            //this.trajet = _trajet;
             this.trajet_str = _trajet.Depart.AITA + " - " + _trajet.Arrivee.AITA;
             this.depart = _depart;
             this.arrivee = _arrivee;
             this.avion = _avion.Matricule;
+            this.prix = _prix;
         }
+
 
         public Vol() { }
 
@@ -35,11 +38,6 @@ namespace WpfApp1.Class.Entity
             set { id = value; }
         }
 
-        //public Trajet Trajet
-        //{
-        //    get { return trajet; }
-        //    set { trajet = value; }
-        //}
 
         public string Trajet_Str
         {
@@ -47,11 +45,13 @@ namespace WpfApp1.Class.Entity
             set { trajet_str = value; }
         }
 
+
         public string Depart
         {
             get { return depart; }
             set { depart = value; }
         }
+
 
         public string Arrive
         {
@@ -59,10 +59,17 @@ namespace WpfApp1.Class.Entity
             set { arrivee = value; }
         }
 
+
         public string Avion
         {
             get { return avion; }
             set { avion = value; }
         }        
+
+
+        public List<double[]> Tarifs
+        {
+            get { return prix; }
+        }
     }
 }

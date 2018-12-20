@@ -41,3 +41,5 @@ C:\Users\yoann\source\repos\WpfApp1\WPF - AirAtlantique\obj\Debug\WpfApp1.exe
 C:\Users\yoann\source\repos\WpfApp1\WPF - AirAtlantique\obj\Debug\WpfApp1.pdb
 C:\Users\yoann\source\repos\WpfApp1\WPF - AirAtlantique\obj\Debug\TimeControl.baml
 C:\Users\yoann\source\repos\WpfApp1\WPF - AirAtlantique\obj\Debug\TimeControl.g.cs
+C:\Users\yoann\source\repos\WpfApp1\WPF - AirAtlantique\obj\Debug\NumericBox.baml
+C:\Users\yoann\source\repos\WpfApp1\WPF - AirAtlantique\obj\Debug\NumericBox.g.cs

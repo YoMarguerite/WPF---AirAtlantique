@@ -12,39 +12,34 @@ namespace WpfApp1.Class
     {
         private BDD bdd = new BDD();
 
-        public void InsertVol(Vol vol, Trajet trajet, Avion avion)
+
+        public int InsertVol(string depart, string arrive, int idavion, int idtrajet)
         {
-            try
-            {
-                // Ouverture de la connexion SQL
-                bdd.connection.Open();
+            // Ouverture de la connexion SQL
+            bdd.connection.Open();
 
-                // Création d'une commande SQL en fonction de l'objet connection
-                MySqlCommand cmd = bdd.connection.CreateCommand();
+            // Création d'une commande SQL en fonction de l'objet connection
+            MySqlCommand cmd = bdd.connection.CreateCommand();
 
-                // Requête SQL
-                cmd.CommandText = "INSERT INTO vol (trajet, depart, arrive, avion) " +
-                    "VALUES (@trajet, @depart, @arrive, @avion); SELECT @@Identity as Id";
+            // Requête SQL
+            cmd.CommandText = "INSERT INTO vol (trajet, depart, arrive, avion) " +
+                "VALUES (@trajet, @depart, @arrive, @avion); SELECT @@Identity as Id";
 
-                // utilisation de l'objet contact passé en paramètre
-                cmd.Parameters.AddWithValue("@trajet", trajet.Id);
-                cmd.Parameters.AddWithValue("@depart", vol.Depart);
-                cmd.Parameters.AddWithValue("@arrive", vol.Arrive);
-                cmd.Parameters.AddWithValue("@modele", avion.Id);
+            // utilisation de l'objet contact passé en paramètre
+            cmd.Parameters.AddWithValue("@trajet", idtrajet);
+            cmd.Parameters.AddWithValue("@depart", depart);
+            cmd.Parameters.AddWithValue("@arrive", arrive);
+            cmd.Parameters.AddWithValue("@avion", idavion);
 
-                // Exécution de la commande SQL
-                cmd.ExecuteNonQuery();
+            // Exécution de la commande SQL
+            object reader = cmd.ExecuteScalar();
 
-                // Fermeture de la connexion
-                bdd.connection.Close();
-            }
-            catch
-            {
-                // Gestion des erreurs :
-                // Possibilité de créer un Logger pour les exceptions SQL reçus
-                // Possibilité de créer une méthode avec un booléan en retour pour savoir si le contact à été ajouté correctement.
-            }
+            // Fermeture de la connexion
+            bdd.connection.Close();
+
+            return int.Parse(reader.ToString());
         }
+
 
         public List<string[]> SelectVols()
         {
@@ -76,6 +71,35 @@ namespace WpfApp1.Class
         }
 
 
+        public List<double[]> SelectTarifs()
+        {
+            bdd.connection.Open();
+            List<double[]> results = new List<double[]>();
+            double[] tarif;
+
+            // Création d'une commande SQL en fonction de l'objet connection
+            MySqlCommand cmd = bdd.connection.CreateCommand();
+
+            // Requête SQL
+            cmd.CommandText = "SELECT * from vol_has_tarif";
+
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    tarif = new double[3] { int.Parse(reader.GetString(0)), int.Parse(reader.GetString(1)), double.Parse(reader.GetString(2)) };
+                    results.Add(tarif);
+                }
+            }
+
+            bdd.connection.Close();
+
+            return results;
+        }
+
+
         public void UpdateVolTrajet(int id, int idtrajet)
         {
             bdd.connection.Open();
@@ -92,6 +116,7 @@ namespace WpfApp1.Class
 
             bdd.connection.Close();
         }
+
 
         public void UpdateVolDepart(int id, string str)
         {
@@ -110,6 +135,7 @@ namespace WpfApp1.Class
             bdd.connection.Close();
         }
 
+
         public void UpdateVolArrive(int id, string str)
         {
             bdd.connection.Open();
@@ -126,6 +152,7 @@ namespace WpfApp1.Class
 
             bdd.connection.Close();
         }
+
 
         public void UpdateVolAvion(int id, int idavion)
         {
@@ -144,6 +171,7 @@ namespace WpfApp1.Class
             bdd.connection.Close();
         }
 
+
         public void Delete(int id)
         {
             bdd.connection.Open();
@@ -159,6 +187,5 @@ namespace WpfApp1.Class
 
             bdd.connection.Close();
         }
-
     }
 }

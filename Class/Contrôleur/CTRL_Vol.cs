@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using WpfApp1.Class.Entity;
 
 namespace WpfApp1.Class.Contrôleur
@@ -17,11 +18,12 @@ namespace WpfApp1.Class.Contrôleur
         public CTRL_Vol(CTRL_Trajet trajets, CTRL_Avion avions)
         {
             List<string[]> list_vols = bdd_vol.SelectVols();
+            List<double[]> prix = bdd_vol.SelectTarifs();
             Vol vol;
 
             foreach (string[] tab_vol in list_vols)
             {
-                vol = new Vol(int.Parse(tab_vol[0]), trajets.Find(int.Parse(tab_vol[1])), tab_vol[2], tab_vol[3], avions.Find(int.Parse(tab_vol[4])));
+                vol = new Vol(int.Parse(tab_vol[0]), trajets.Find(int.Parse(tab_vol[1])), tab_vol[2], tab_vol[3], avions.Find(int.Parse(tab_vol[4])), TarifsByVol(int.Parse(tab_vol[0]), prix));
                 vols.Add(vol);
             }
         }
@@ -46,6 +48,14 @@ namespace WpfApp1.Class.Contrôleur
 
                 return datavol;
             }
+        }
+
+
+        public void Nouveau(Vol vol, int idavion, int idtrajet)
+        {
+            vols.Add(vol);
+
+            vol.Id = bdd_vol.InsertVol(vol.Depart.StringFormatDate(), vol.Arrive.StringFormatDate(), idavion, idtrajet);
         }
 
 
@@ -88,6 +98,62 @@ namespace WpfApp1.Class.Contrôleur
             }
 
             return default(Vol);
+        }
+
+
+        public List<Vol> Correspondance(Trajet trajet, bool horaire, DateTime date)
+        {
+            List<Vol> list_vols_trajets = VolsByTrajet(trajet.Aeroport_Str);
+            List<Vol> list_vols = new List<Vol>();
+            DateTime time_vol;
+
+            foreach (Vol vol in list_vols_trajets)
+            {
+                if (!horaire)
+                {
+                    time_vol = DateTime.Parse(vol.Depart);
+                }
+                else
+                {
+                    time_vol = DateTime.Parse(vol.Arrive);
+                }
+                
+                if ((date.AddMinutes(-30) < time_vol) && (date.AddMinutes(30) > time_vol))
+                {
+                    list_vols.Add(vol);
+                }
+            }
+            return list_vols;
+        }
+
+
+        public List<Vol> VolsByTrajet(string trajet_str)
+        {
+            List<Vol> list_vols = new List<Vol>();
+            foreach (Vol vol in vols)
+            {
+                if(vol.Trajet_Str == trajet_str)
+                {
+                    list_vols.Add(vol);
+                }
+            }
+            return list_vols;
+        }
+
+
+        public List<double[]> TarifsByVol(int idvol, List<double[]> tarifs)
+        {
+             List<double[]> results = new List<double[]>();
+
+            foreach (double[] tarif in tarifs)
+            {
+                if(tarif[1] == idvol)
+                {
+                    results.Add(new double[2] { tarif[0], tarif[2] });
+                }
+            }
+
+            return results;
         }
 
 

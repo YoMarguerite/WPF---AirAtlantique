@@ -46,7 +46,19 @@ namespace WpfApp1.Class
         {
             string[] tab = value.Split(' ');
             string[] date = tab[0].Split('/');
-            value = date[2] + "/" + date[1] + "/" + date[0] + " " + tab[1];
+            value = date[2] + "-" + date[1] + "-" + date[0];
+            if(tab.Length == 2)
+            {
+                value += " " + tab[1];
+            }
+            return value;
+        }
+
+        public static string DateFormatString(this string value)
+        {
+            string[] tab = value.Split(' ');
+            string[] date = tab[0].Split('/');
+            value = date[2] + "-" + date[1] + "-" + date[0];
             return value;
         }
     }

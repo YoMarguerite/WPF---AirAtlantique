@@ -12,39 +12,35 @@ namespace WpfApp1.Class
     {
         private BDD bdd = new BDD();
 
-        public void InsertMaintenance(Maintenance maintenance, Avion avion, Aeroport aeroport)
+
+        public int InsertMaintenance(string date, string details, int idavion, int idaeroport)
         {
-            try
-            {
-                // Ouverture de la connexion SQL
-                bdd.connection.Open();
+            // Ouverture de la connexion SQL
+            bdd.connection.Open();
 
-                // Création d'une commande SQL en fonction de l'objet connection
-                MySqlCommand cmd = bdd.connection.CreateCommand();
+            // Création d'une commande SQL en fonction de l'objet connection
+            MySqlCommand cmd = bdd.connection.CreateCommand();
 
-                // Requête SQL
-                cmd.CommandText = "INSERT INTO maintenance (date, details, idavion, idaeroport) " +
-                    "VALUES (@date, @details, @avion, @aeroport); SELECT @@Identity as Id";
+            // Requête SQL
+            cmd.CommandText = "INSERT INTO maintenance (date, details, idavion, idaeroport) " +
+                "VALUES (@date, @details, @avion, @aeroport); SELECT @@Identity as Id";
 
-                // utilisation de l'objet contact passé en paramètre
-                cmd.Parameters.AddWithValue("@date", maintenance.Date);
-                cmd.Parameters.AddWithValue("@details", maintenance.Details);
-                cmd.Parameters.AddWithValue("@avion", avion.Id);
-                cmd.Parameters.AddWithValue("@aeroport", aeroport.Id);
+            // utilisation de l'objet contact passé en paramètre
+            cmd.Parameters.AddWithValue("@date", date);
+            cmd.Parameters.AddWithValue("@details", details);
+            cmd.Parameters.AddWithValue("@avion", idavion);
+            cmd.Parameters.AddWithValue("@aeroport", idaeroport);
 
-                // Exécution de la commande SQL
-                cmd.ExecuteNonQuery();
+            // Exécution de la commande SQL
+            object reader = cmd.ExecuteScalar();
 
-                // Fermeture de la connexion
-                bdd.connection.Close();
-            }
-            catch
-            {
-                // Gestion des erreurs :
-                // Possibilité de créer un Logger pour les exceptions SQL reçus
-                // Possibilité de créer une méthode avec un booléan en retour pour savoir si le contact à été ajouté correctement.
-            }
+            // Fermeture de la connexion
+            bdd.connection.Close();
+
+            return int.Parse(reader.ToString());
+           
         }
+
 
         public List<string[]> SelectMaintenances()
         {
@@ -93,6 +89,7 @@ namespace WpfApp1.Class
             bdd.connection.Close();
         }
 
+
         public void UpdateDetails(int id, string str)
         {
             bdd.connection.Open();
@@ -109,6 +106,7 @@ namespace WpfApp1.Class
 
             bdd.connection.Close();
         }
+
 
         public void UpdateAvion(int id, int id_avion)
         {
@@ -127,6 +125,7 @@ namespace WpfApp1.Class
             bdd.connection.Close();
         }
 
+
         public void UpdateAeroport(int id, int idaeroport)
         {
             bdd.connection.Open();
@@ -144,6 +143,7 @@ namespace WpfApp1.Class
             bdd.connection.Close();
         }
 
+
         public void Delete(int id)
         {
             bdd.connection.Open();
@@ -159,6 +159,5 @@ namespace WpfApp1.Class
 
             bdd.connection.Close();
         }
-
     }
 }

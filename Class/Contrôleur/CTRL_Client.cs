@@ -32,6 +32,7 @@ namespace WpfApp1.Class.Contrôleur
             get { return clients; }
         }
 
+
         public ObservableCollection<Client> DataClient
         {
             get
@@ -71,12 +72,14 @@ namespace WpfApp1.Class.Contrôleur
             bdd_client.UpdateClientMail(client.Id, str);
         }
 
+
         public void ChangeCivilite(ref Utilisateur user, string str)
         {
             user.Civilite = str;
             Client client = (Client)user;
             bdd_client.UpdateClientCivilite(client.Id, str.CiviliteToBoolean());
         }
+
 
         public void ChangeFidelite(ref Utilisateur user, int str)
         {
@@ -89,7 +92,7 @@ namespace WpfApp1.Class.Contrôleur
         public bool ClientExist(string mail)
         {
             
-            if(FindbyMail(mail) == default(Client))
+            if(FindByMail(mail) == default(Client))
             {
                 return false;
             }
@@ -100,11 +103,11 @@ namespace WpfApp1.Class.Contrôleur
 
         public Client Find(int id)
         {
-            for (int i = 0; i < clients.Count; i++)
+            foreach (Client client in clients)
             {
-                if (clients[i].Id == id)
+                if (client.Id == id)
                 {
-                    return clients[i];
+                    return client;
                 }
             }
 
@@ -112,13 +115,13 @@ namespace WpfApp1.Class.Contrôleur
         }
 
 
-        public Client FindbyMail(string mail)
+        public Client FindByMail(string mail)
         {
-            for (int i = 0; i < clients.Count; i++)
+            foreach (Client client in clients)
             {
-                if (clients[i].Mail == mail)
+                if (client.Mail == mail)
                 {
-                    return clients[i];
+                    return client;
                 }
             }
 

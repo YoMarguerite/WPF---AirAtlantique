@@ -12,40 +12,6 @@ namespace WpfApp1.Class
     {
         private BDD bdd = new BDD();
 
-        public void InsertAeroport(Aeroport aeroport)
-        {
-            try
-            {
-                // Ouverture de la connexion SQL
-                bdd.connection.Open();
-
-                // Création d'une commande SQL en fonction de l'objet connection
-                MySqlCommand cmd = bdd.connection.CreateCommand();
-
-                // Requête SQL
-                cmd.CommandText = "INSERT INTO aeroport (nom, ville, pays, AITA) " +
-                    "VALUES (@nom, @ville, @pays, @aita); SELECT @@Identity as Id";
-
-                // utilisation de l'objet contact passé en paramètre
-                cmd.Parameters.AddWithValue("@nom", aeroport.Nom);
-                cmd.Parameters.AddWithValue("@ville", aeroport.Ville);
-                cmd.Parameters.AddWithValue("@pays", aeroport.Pays);
-                cmd.Parameters.AddWithValue("@aita", aeroport.AITA);
-
-                // Exécution de la commande SQL
-                cmd.ExecuteNonQuery();
-
-                // Fermeture de la connexion
-                bdd.connection.Close();
-            }
-            catch
-            {
-                // Gestion des erreurs :
-                // Possibilité de créer un Logger pour les exceptions SQL reçus
-                // Possibilité de créer une méthode avec un booléan en retour pour savoir si le contact à été ajouté correctement.
-            }
-        }
-
         public List<string[]> SelectAeroports()
         {
             bdd.connection.Open();
@@ -74,6 +40,5 @@ namespace WpfApp1.Class
             return results;
 
         }
-
     }
 }

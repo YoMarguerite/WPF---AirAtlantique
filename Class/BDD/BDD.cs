@@ -23,9 +23,6 @@ namespace WpfApp1.Class
             // Création de la chaîne de connexion
             string connectionString = "SERVER=127.0.0.1; DATABASE=bdd; UID=root; PASSWORD=sohcahtoa";
             this.connection = new MySqlConnection(connectionString);
-        }
-
-        // Méthode pour ajouter un contact
-        
+        }              
     }
 }

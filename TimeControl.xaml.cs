@@ -32,7 +32,22 @@ namespace WpfApp1
 
         public string Time
         {
-            get { return Hours.ToString() + ":" + Minutes.ToString(); }
+            get
+            {
+                string hour = "";
+                if (Hours < 10)
+                {
+                    hour = "0";
+                }
+                hour += Hours.ToString();
+                string minute = "";
+                if (Minutes < 10)
+                {
+                    minute = "0";
+                }
+                minute += Minutes.ToString();
+                return hour + ":" + minute +":00";
+            }
         }
 
         private void ChangeHours(object sender, RoutedEventArgs e)
@@ -45,9 +60,8 @@ namespace WpfApp1
                     verif = 23;
                 }
                 Hours = verif;
-            }
-            TxtHours.Text = Hours.ToString();
-
+            }            
+            TxtHours.Text = Hours.ToString();            
         }
 
         private void ChangeMinutes(object sender, RoutedEventArgs e)
@@ -62,7 +76,6 @@ namespace WpfApp1
                 Minutes = verif;
             }
             TxtMinutes.Text = Minutes.ToString();
-
         }
 
         private bool Numeric(string Receive)

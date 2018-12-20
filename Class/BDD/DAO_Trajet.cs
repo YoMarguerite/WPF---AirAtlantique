@@ -12,39 +12,6 @@ namespace WpfApp1.Class
     {
         private BDD bdd = new BDD();
 
-        public void InsertTrajet(Trajet trajet)
-        {
-            try
-            {
-                // Ouverture de la connexion SQL
-                bdd.connection.Open();
-
-                // Création d'une commande SQL en fonction de l'objet connection
-                MySqlCommand cmd = bdd.connection.CreateCommand();
-
-                // Requête SQL
-                cmd.CommandText = "INSERT INTO trajet (Duree, Kilometre, depart, arrive) " +
-                    "VALUES (@duree, @kilometre, @depart, @arrive); SELECT @@Identity as Id";
-
-                // utilisation de l'objet contact passé en paramètre
-                cmd.Parameters.AddWithValue("@trajet", trajet.Duree);
-                cmd.Parameters.AddWithValue("@depart", trajet.Kilometre);
-                cmd.Parameters.AddWithValue("@arrive", trajet.Depart);
-                cmd.Parameters.AddWithValue("@modele", trajet.Arrivee);
-
-                // Exécution de la commande SQL
-                cmd.ExecuteNonQuery();
-
-                // Fermeture de la connexion
-                bdd.connection.Close();
-            }
-            catch
-            {
-                // Gestion des erreurs :
-                // Possibilité de créer un Logger pour les exceptions SQL reçus
-                // Possibilité de créer une méthode avec un booléan en retour pour savoir si le contact à été ajouté correctement.
-            }
-        }
 
         public List<string[]> SelectTrajets()
         {
@@ -74,6 +41,5 @@ namespace WpfApp1.Class
             return results;
 
         }
-
     }
 }

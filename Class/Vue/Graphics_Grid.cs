@@ -144,7 +144,7 @@ namespace WpfApp1.Class
             return borderror;
         }
 
-        public static Grid Grid_Combo(string str_lbl, string str_txt, List<string> listItems)
+        public static Grid Grid_Combo(ref ComboBox combo, string str_lbl, string str_txt, List<string> listItems)
         {
             //-----------------------Label----------------
             Label lbl = new Label();
@@ -153,10 +153,11 @@ namespace WpfApp1.Class
 
 
             //---------------------ComboBox-----------------
-            ComboBox combo = new ComboBox();
             combo.ItemsSource = listItems;
+            combo.SelectedIndex = 0;
             combo.Name = str_txt;
-            combo.HorizontalAlignment = HorizontalAlignment.Right;
+            combo.HorizontalAlignment = HorizontalAlignment.Left;
+            combo.Margin = new Thickness(150, 0, 0, 0);
             combo.Width = 200;
 
 
@@ -170,7 +171,7 @@ namespace WpfApp1.Class
             return grid;
         }
 
-        public static Grid Grid_Time(string str_lbl, string str_txt)
+        public static Grid Grid_Time(ref TimeControl time, string str_lbl, string str_txt)
         {
             //-----------------------Label----------------
             Label lbl = new Label();
@@ -179,23 +180,23 @@ namespace WpfApp1.Class
 
 
             //---------------------TimeControl-----------------
-            TimeControl txt = new TimeControl();
-            txt.Name = str_txt;
-            txt.HorizontalAlignment = HorizontalAlignment.Right;
-            txt.Width = 200;
+            time.Name = str_txt;
+            time.HorizontalAlignment = HorizontalAlignment.Left;
+            time.Margin = new Thickness(150, 0, 0, 0);
+            time.Width = 200;
 
 
             //-----------------------Grid-----------------
             Grid grid = new Grid();
             grid.Children.Add(lbl);
-            grid.Children.Add(txt);
+            grid.Children.Add(time);
             grid.Margin = new Thickness(300, 10, 300, 0);
             DockPanel.SetDock(grid, Dock.Top);
 
             return grid;
         }
 
-        public static Grid Grid_Date(ref DatePicker date, string str_lbl, string str_txt)
+        public static Grid Grid_Number(ref NumericBox number, string str_lbl, string str_txt)
         {
             //-----------------------Label----------------
             Label lbl = new Label();
@@ -203,7 +204,32 @@ namespace WpfApp1.Class
             lbl.HorizontalAlignment = HorizontalAlignment.Left;
 
 
-            //---------------------DatePicker-----------------
+            //---------------------TimeControl-----------------
+            number.Name = str_txt;
+            number.HorizontalAlignment = HorizontalAlignment.Left;
+            number.Margin = new Thickness(150, 0, 0, 0);
+            number.Width = 200;
+
+
+            //-----------------------Grid-----------------
+            Grid grid = new Grid();
+            grid.Children.Add(lbl);
+            grid.Children.Add(number);
+            grid.Margin = new Thickness(300, 10, 300, 0);
+            DockPanel.SetDock(grid, Dock.Top);
+
+            return grid;
+        }
+
+        public static Grid Grid_Date(ref DatePicker date, string str_lbl, string str_txt, ref Border borderror, string str_error, string str_error_txt)
+        {
+            //-----------------------Label----------------
+            Label lbl = new Label();
+            lbl.Content = str_lbl;
+            lbl.HorizontalAlignment = HorizontalAlignment.Left;
+
+
+            //---------------------TextBox-----------------
             date.Name = str_txt;
             date.HorizontalAlignment = HorizontalAlignment.Left;
             date.Margin = new Thickness(150, 0, 0, 0);
@@ -212,9 +238,12 @@ namespace WpfApp1.Class
 
             //-----------------------Grid-----------------
             Grid grid = new Grid();
+
+
             grid.Children.Add(lbl);
             grid.Children.Add(date);
-            grid.Margin = new Thickness(300, 10, 300, 0);
+            grid.Children.Add(Block_Error(borderror, str_error, str_error_txt));
+            grid.Margin = new Thickness(300, 10, 0, 0);
             DockPanel.SetDock(grid, Dock.Top);
 
             return grid;
@@ -257,41 +286,6 @@ namespace WpfApp1.Class
             grid.Children.Add(button);
             grid.Margin = new Thickness(400, 10, 400, 0);
             DockPanel.SetDock(grid, Dock.Top);
-
-            return grid;
-        }
-
-        public static Grid Grid_Radio(ref List<RadioButton> listradio, string str_name)
-        {
-            Grid grid = new Grid();
-            grid.Margin = new Thickness(200, 10, 200, 0);
-            DockPanel.SetDock(grid, Dock.Top);
-            ColumnDefinition coldef;
-
-            for (int i = 0; i < 2; i++)
-            {
-                coldef = new ColumnDefinition();
-                coldef.Width = new GridLength(1, GridUnitType.Star);
-                grid.ColumnDefinitions.Add(coldef);
-            }
-
-            RowDefinition rowdef;
-            int index = 0;
-
-
-            foreach (RadioButton radio in listradio)
-            {
-                radio.HorizontalAlignment = HorizontalAlignment.Left;
-
-                rowdef = new RowDefinition();
-                rowdef.Height = new GridLength(30);
-                grid.RowDefinitions.Add(rowdef);
-                Grid.SetRow(radio, index);
-                Grid.SetColumn(radio, 1);
-                grid.Children.Add(radio);
-
-                index++;
-            }
 
             return grid;
         }
@@ -361,7 +355,7 @@ namespace WpfApp1.Class
             return grid;
         }
 
-        public static DataGrid DataGrid<T>(ObservableCollection<T> collection, List<string> data, EventHandler<DataGridCellEditEndingEventArgs> action)
+        public static DataGrid DataGrid<T>(ObservableCollection<T> collection, EventHandler<DataGridCellEditEndingEventArgs> action)
         {
             DataGrid grid = new DataGrid();
             grid.CanUserAddRows = false;
@@ -376,11 +370,12 @@ namespace WpfApp1.Class
             return grid;
         }
 
-        public static DataGridTextColumn Column(string str)
+        public static DataGridTextColumn Column(string header, string bind, bool read)
         {
             DataGridTextColumn coldef = new DataGridTextColumn();
-            coldef.Header = str;
-            coldef.Binding = new Binding(str);
+            coldef.Header = header;
+            coldef.Binding = new Binding(bind);
+            coldef.IsReadOnly = read;
             coldef.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
             return coldef;
         }
@@ -395,7 +390,7 @@ namespace WpfApp1.Class
             return coldef;
         }
 
-        public static DataGridTemplateColumn Column(string header, string content, RoutedEventHandler action, RoutedEventHandler action2)
+        public static DataGridTemplateColumn Column(string header, string content, RoutedEventHandler action)
         {
             DataGridTemplateColumn coldef = new DataGridTemplateColumn { Header = header };
             coldef.Width = new DataGridLength(1, DataGridLengthUnitType.SizeToCells);
@@ -410,7 +405,6 @@ namespace WpfApp1.Class
             btn.SetValue(Button.ContentProperty, content);
             btn.SetBinding(Button.CommandParameterProperty, new Binding("Id"));
             btn.AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler(action));
-            btn.AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler(action2));
             panel.AppendChild(btn);
 
             data.VisualTree = panel;

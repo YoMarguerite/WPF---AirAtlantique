@@ -41,8 +41,8 @@ namespace WpfApp1.Class
             bdd.connection.Close();
 
             return int.Parse(reader.ToString());
-
         }
+
 
         public List<string[]> SelectClients()
         {
@@ -72,58 +72,7 @@ namespace WpfApp1.Class
 
             return results;
         }
-
-        public string SelectClient(string mail)
-        {
-            bdd.connection.Open();
-
-            string result = null;
-
-            // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = bdd.connection.CreateCommand();
-
-            // Requête SQL
-            cmd.CommandText = "SELECT Nom, Prenom, Mail, Civilite, Fidelite from client where Mail=@mail";
-            cmd.Parameters.AddWithValue("@mail", mail);
-
-            MySqlDataReader reader = cmd.ExecuteReader();
-
-
-            if (reader.HasRows)
-            {
-                while (reader.Read())
-                {
-                    result = reader.GetString(0) + ";" + reader.GetString(1) + ";" + reader.GetString(2) + ";" + reader.GetString(3) + ";" + reader.GetString(4);
-                }
-            }
-
-            bdd.connection.Close();
-
-            return result;
-        }
-
-        public bool SelectMail(string mail)
-        {
-            bdd.connection.Open();
-
-            // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = bdd.connection.CreateCommand();
-
-            // Requête SQL
-            cmd.CommandText = "SELECT * from client where Mail=@mail";
-            cmd.Parameters.AddWithValue("@mail", mail);
-
-            MySqlDataReader reader = cmd.ExecuteReader();
-
-            bdd.connection.Close();
-
-            if (reader.HasRows)
-            {
-                return true;
-            }
-            return false;
-
-        }
+        
 
         public bool SelectMotDePasse(string mail, string mdp)
         {
@@ -149,8 +98,8 @@ namespace WpfApp1.Class
             }
             
             return false;
-
         }
+
 
         public void UpdateClientNom(int id, string str)
         {
@@ -169,6 +118,7 @@ namespace WpfApp1.Class
             bdd.connection.Close();
         }
 
+
         public void UpdateClientPrenom(int id, string str)
         {
             bdd.connection.Open();
@@ -186,6 +136,7 @@ namespace WpfApp1.Class
             bdd.connection.Close();
         }
 
+
         public void UpdateClientMail(int id, string str)
         {
             bdd.connection.Open();
@@ -201,6 +152,7 @@ namespace WpfApp1.Class
 
             bdd.connection.Close();
         }
+
 
         public void UpdateClientCivilite(int id, bool civilite)
         {
@@ -219,6 +171,7 @@ namespace WpfApp1.Class
             bdd.connection.Close();
         }
 
+
         public void UpdateClientFidelite(int id, int fidelite)
         {
             bdd.connection.Open();
@@ -236,6 +189,7 @@ namespace WpfApp1.Class
             bdd.connection.Close();
         }
 
+
         public void Delete(int id)
         {
             bdd.connection.Open();
@@ -251,7 +205,6 @@ namespace WpfApp1.Class
 
             bdd.connection.Close();
         }
-
     }
 }
 

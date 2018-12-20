@@ -7,21 +7,21 @@ using MySql.Data.MySqlClient;
 
 namespace WpfApp1.Class
 {
-    class DAO_Avion
+    class DAO_Billet
     {
         private BDD bdd = new BDD();
 
-        public List<string[]> SelectAvions()
+        public List<int[]> SelectBillets()
         {
             bdd.connection.Open();
-            List<string[]> results = new List<string[]>();
-            string str_avion = null;
+            List<int[]> results = new List<int[]>();
+            int[] billet = null;
 
             // Création d'une commande SQL en fonction de l'objet connection
             MySqlCommand cmd = bdd.connection.CreateCommand();
 
             // Requête SQL
-            cmd.CommandText = "SELECT * from avion";
+            cmd.CommandText = "SELECT * from billet";
 
             MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -29,16 +29,14 @@ namespace WpfApp1.Class
             {
                 while (reader.Read())
                 {
-                    str_avion = reader.GetString(0) + ";" + reader.GetString(1) + ";" + reader.GetString(2) + ";" + reader.GetString(3) + ";" + reader.GetString(4)
-                        + ";" + reader.GetString(5) + ";" + reader.GetString(6);
-                    results.Add(str_avion.Split(';'));
+                    billet = new int[4] { int.Parse(reader.GetString(0)), int.Parse(reader.GetString(1)), int.Parse(reader.GetString(2)), int.Parse(reader.GetString(3)) };
+                    results.Add(billet);
                 }
             }
 
             bdd.connection.Close();
 
             return results;
-
         }
     }
 }

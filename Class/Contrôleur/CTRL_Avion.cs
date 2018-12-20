@@ -24,11 +24,13 @@ namespace WpfApp1.Class.Contrôleur
             }
         }
 
+
         public List<Avion> Avion
         {
             get { return avions; }
             set { avions = value; }
         }
+
 
         public List<string> Matricule
         {
@@ -42,6 +44,7 @@ namespace WpfApp1.Class.Contrôleur
             }
         }
 
+
         public Avion Find(int id)
         {
             for(int i = 0; i<avions.Count; i++)
@@ -54,6 +57,7 @@ namespace WpfApp1.Class.Contrôleur
 
             return default(Avion);
         }
+
 
         public Avion FindByMatricule(string matricule)
         {

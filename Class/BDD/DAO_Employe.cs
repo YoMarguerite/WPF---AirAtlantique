@@ -11,6 +11,7 @@ namespace WpfApp1.Class
     {
         private BDD bdd = new BDD();
 
+
         public int InsertEmploye(Employe employe, string MotDePasse, int Poste)
         {
 
@@ -40,8 +41,8 @@ namespace WpfApp1.Class
             bdd.connection.Close();
 
             return int.Parse(reader.ToString());
-
         }
+
 
         public List<string[]> SelectEmployes()
         {
@@ -72,58 +73,6 @@ namespace WpfApp1.Class
             return results;
         }
 
-        public string SelectEmploye(string mail)
-        {
-            bdd.connection.Open();
-
-            string result = null;
-
-            // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = bdd.connection.CreateCommand();
-
-            // Requête SQL
-            cmd.CommandText = "SELECT Nom, Prenom, Mail, Civilite, Poste from employe where Mail=@mail";
-            cmd.Parameters.AddWithValue("@mail", mail);
-
-            MySqlDataReader reader = cmd.ExecuteReader();
-
-
-            if (reader.HasRows)
-            {
-                while (reader.Read())
-                {
-                    result = reader.GetString(0) + ";" + reader.GetString(1) + ";" + reader.GetString(2) + ";" + reader.GetString(3)
-                        + ";" + reader.GetString(4);
-                }
-            }
-
-            bdd.connection.Close();
-
-            return result;
-        }
-
-        public bool SelectMail(string mail)
-        {
-            bdd.connection.Open();
-
-            // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = bdd.connection.CreateCommand();
-
-            // Requête SQL
-            cmd.CommandText = "SELECT * from employe where Mail=@mail";
-            cmd.Parameters.AddWithValue("@mail", mail);
-
-            MySqlDataReader reader = cmd.ExecuteReader();
-
-            bdd.connection.Close();
-
-            if (reader.HasRows)
-            {
-                return true;
-            }
-            return false;
-
-        }
 
         public bool SelectMotDePasse(string mail, string mdp)
         {
@@ -150,6 +99,7 @@ namespace WpfApp1.Class
 
         }
 
+
         public void UpdateEmployeNom(int id, string str)
         {
             bdd.connection.Open();
@@ -167,6 +117,7 @@ namespace WpfApp1.Class
             bdd.connection.Close();
         }
 
+
         public void UpdateEmployePrenom(int id, string str)
         {
             bdd.connection.Open();
@@ -183,6 +134,7 @@ namespace WpfApp1.Class
 
             bdd.connection.Close();
         }
+
 
         public void UpdateEmployePoste(int id, int poste)
         {

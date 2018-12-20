@@ -21,7 +21,7 @@ namespace WpfApp1.Class.Contrôleur
 
             foreach (string[] tab_maintenance in list_maintenances)
             {
-                maintenance = new Maintenance(int.Parse(tab_maintenance[0]), tab_maintenance[1], tab_maintenance[2], avions.Find(int.Parse(tab_maintenance[3])), aeroports.Find(int.Parse(tab_maintenance[4])));
+                maintenance = new Maintenance(int.Parse(tab_maintenance[0]), tab_maintenance[1].Split(' ')[0], tab_maintenance[2], avions.Find(int.Parse(tab_maintenance[3])), aeroports.Find(int.Parse(tab_maintenance[4])));
                 maintenances.Add(maintenance);
             }
         }
@@ -46,6 +46,14 @@ namespace WpfApp1.Class.Contrôleur
 
                 return datamaintenance;
             }
+        }
+
+        public void Nouveau(Maintenance maintenance, int idavion, int idaeroport)
+        {
+            maintenances.Add(maintenance);
+
+            string date = maintenance.Date.StringFormatDate();
+            maintenance.Id = bdd_maintenance.InsertMaintenance(date, maintenance.Details, idavion, idaeroport);
         }
 
 

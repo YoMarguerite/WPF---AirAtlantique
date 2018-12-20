@@ -43,6 +43,19 @@ namespace WpfApp1.Class.Contrôleur
             }
         }
 
+        public List<string> Nom
+        {
+            get
+            {
+                List<string> Nom = new List<string>();
+                foreach (Aeroport aeroport in aeroports)
+                {
+                    Nom.Add(aeroport.Nom);
+                }
+                return Nom;
+            }
+        }
+
         public Aeroport Find(int id)
         {
             for (int i = 0; i < aeroports.Count; i++)
@@ -61,6 +74,19 @@ namespace WpfApp1.Class.Contrôleur
             for (int i = 0; i < aeroports.Count; i++)
             {
                 if (aeroports[i].AITA == aita)
+                {
+                    return aeroports[i];
+                }
+            }
+
+            return default(Aeroport);
+        }
+
+        public Aeroport FindByNom(string nom)
+        {
+            for (int i = 0; i < aeroports.Count; i++)
+            {
+                if (aeroports[i].Nom == nom)
                 {
                     return aeroports[i];
                 }
