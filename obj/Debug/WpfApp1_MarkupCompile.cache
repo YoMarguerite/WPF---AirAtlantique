@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\yoann\source\repos\WpfApp1\WPF - AirAtlantique\App.xaml
-3-1454511755
+13-1397106933
 
-45-667749030
-15-1975088290
-MainWindow.xaml;NumericBox.xaml;TimeControl.xaml;
+48-1394148675
+181810525966
+Class\Avion\AvionPage.xaml;Class\Aéroport\AeroportPage.xaml;Class\Client\ClientPage.xaml;Class\Trajet\TrajetPage.xaml;Class\View\Accueil.xaml;Class\View\Connexion.xaml;Class\View\Inscription.xaml;Class\Vol\VolPage.xaml;MainWindow.xaml;NumericBox.xaml;Page1.xaml;Page2.xaml;TimeControl.xaml;
 
 False
 

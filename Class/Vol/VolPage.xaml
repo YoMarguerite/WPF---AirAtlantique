@@ -1,0 +1,51 @@
+﻿<Page x:Class="WpfApp1.Class.Vol.VolPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp1.Class.Vol"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Vol">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid Grid.Column="0" ItemsSource="{Binding}" Name="grid" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="false" CellEditEnding="Edit" SelectionChanged="SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridComboBoxColumn Header="Trajet" x:Name="trajet" SelectedValueBinding="{Binding StrTrajet}"/>
+                <DataGridComboBoxColumn Header="Avion" x:Name="avion" SelectedValueBinding="{Binding Avion}"/>
+                <DataGridTextColumn Header="Départ" Binding="{Binding Depart}"/>
+                <DataGridTextColumn Header="Arrivée" Binding="{Binding Arrivee}"/>
+                <DataGridTemplateColumn Header="Supprimer" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Supprimer" Click="Supp_vol_click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Column="1" Orientation="Vertical">
+            <TextBlock Text="Nouveau Vol" FontSize="30"/>
+
+            <TextBlock Text="Trajet"/>
+            <ComboBox Name="Trajet"/>
+
+            <TextBlock Text="Avion"/>
+            <ComboBox Name="Avion"/>
+
+            <TextBlock Text="Départ"/>
+            <TextBox Name="Depart"/>
+
+            <TextBlock Text="Arrivée"/>
+            <TextBox Name="Arrivee"/>
+
+            <Button Content="Nouveau" Click="Nouveau_vol_click"/>
+
+        </StackPanel>
+    </Grid>
+</Page>

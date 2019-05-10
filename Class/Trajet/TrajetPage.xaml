@@ -1,0 +1,55 @@
+﻿<Page x:Class="WpfApp1.Class.Trajet.TrajetPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp1.Class.Trajet"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="TrajetPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid Grid.Column="0" ItemsSource="{Binding}" Name="grid" CanUserAddRows="False" CanUserDeleteRows="False" AutoGenerateColumns="false" CellEditEnding="Edit" SelectionChanged="SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Durée" Binding="{Binding Duree}"/>
+                <DataGridComboBoxColumn Header="Départ" x:Name="depart" SelectedValueBinding="{Binding Depart}"/>
+                <DataGridComboBoxColumn Header="Arrivée" x:Name="arrivee" SelectedValueBinding="{Binding Arrivee}"/>
+                <DataGridTextColumn Header="Référence" Binding="{Binding Reference}"/>
+                <DataGridTextColumn Header="Distance" Binding="{Binding Distance}"/>
+                <DataGridTemplateColumn Header="Supprimer" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Supprimer" Click="Supp_trajet_click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Column="1" Orientation="Vertical">
+            <TextBlock Text="Nouveau Trajet" FontSize="30"/>
+
+            <TextBlock Text="Durée"/>
+            <TextBox Name="Duree"/>
+
+            <TextBlock Text="Départ"/>
+            <ComboBox Name="Codepart"/>
+
+            <TextBlock Text="Arrivée"/>
+            <ComboBox Name="Coarrivee"/>
+
+            <TextBlock Text="Référence"/>
+            <TextBox Name="Reference"/>
+
+            <TextBlock Text="Distance"/>
+            <TextBox Name="Distance"/>
+
+            <Button Content="Nouveau" Click="Nouveau_trajet_click"/>
+
+        </StackPanel>
+    </Grid>
+</Page>

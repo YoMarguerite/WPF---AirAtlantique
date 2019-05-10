@@ -35,6 +35,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net, Version=0.1.5073.29922, Culture=neutral, PublicKeyToken=6bcd409ee6bc9292, processorArchitecture=MSIL">
+      <HintPath>packages\BCrypt-Official.0.1.109\lib\BCrypt.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.0.0.14576, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\MaterialDesignColors.1.1.1\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.0.1205, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\MaterialDesignThemes.2.5.0.1205\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data, Version=8.0.13.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Program Files (x86)\MySQL\MySQL Connector Net 8.0.13\Assemblies\v4.5.2\MySql.Data.dll</HintPath>
@@ -60,48 +69,103 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Class\BDD\DAO_Aeroport.cs" />
-    <Compile Include="Class\BDD\DAO_Billet.cs" />
-    <Compile Include="Class\BDD\DAO_Classe.cs" />
-    <Compile Include="Class\BDD\DAO_Maintenance.cs" />
-    <Compile Include="Class\BDD\DAO_Tarif.cs" />
-    <Compile Include="Class\BDD\DAO_Trajet.cs" />
-    <Compile Include="Class\BDD\DAO_Vol.cs" />
-    <Compile Include="Class\Contrôleur\CTRL_Aeroport.cs" />
-    <Compile Include="Class\Contrôleur\CTRL_Avion.cs" />
-    <Compile Include="Class\Contrôleur\CTRL_Billet.cs" />
-    <Compile Include="Class\Contrôleur\CTRL_Classe.cs" />
-    <Compile Include="Class\Contrôleur\CTRL_Employe.cs" />
-    <Compile Include="Class\Contrôleur\CTRL_Client.cs" />
-    <Compile Include="Class\Contrôleur\CTRL_Maintenance.cs" />
-    <Compile Include="Class\Contrôleur\CTRL_Poste.cs" />
-    <Compile Include="Class\Contrôleur\CTRL_Tarif.cs" />
-    <Compile Include="Class\Contrôleur\CTRL_Trajet.cs" />
-    <Compile Include="Class\Contrôleur\CTRL_Vol.cs" />
-    <Compile Include="Class\Entity\Aeroport.cs" />
-    <Compile Include="Class\Entity\Billet.cs" />
-    <Compile Include="Class\Entity\Classe.cs" />
-    <Compile Include="Class\Entity\Client.cs" />
-    <Compile Include="Class\BDD\DAO_Avion.cs" />
-    <Compile Include="Class\BDD\DAO_Employe.cs" />
-    <Compile Include="Class\BDD\DAO_Client.cs" />
-    <Compile Include="Class\BDD\DAO_Poste.cs" />
-    <Compile Include="Class\Entity\Employe.cs" />
-    <Compile Include="Class\Entity\Maintenance.cs" />
-    <Compile Include="Class\Entity\Poste.cs" />
-    <Compile Include="Class\Entity\Tarif.cs" />
-    <Compile Include="Class\Entity\Trajet.cs" />
-    <Compile Include="Class\Entity\Vol.cs" />
-    <Compile Include="Class\Extensions\BoolExtensions.cs" />
-    <Compile Include="Class\Vue\Graphics_Grid.cs" />
-    <Compile Include="Class\Extensions\StringExtensions.cs" />
-    <Compile Include="Class\Entity\Utilisateur.cs" />
+    <Compile Include="Class\Avion\AvionPage.xaml.cs">
+      <DependentUpon>AvionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Class\Aéroport\AeroportPage.xaml.cs">
+      <DependentUpon>AeroportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Class\Aéroport\DAL_Aeroport.cs" />
+    <Compile Include="Class\Billet\DAL_Billet.cs" />
+    <Compile Include="Class\Classe\DAL_Classe.cs" />
+    <Compile Include="Class\Client\ClientPage.xaml.cs">
+      <DependentUpon>ClientPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Class\Maintenance\DAL_Maintenance.cs" />
+    <Compile Include="Class\Tarif\DAL_Tarif.cs" />
+    <Compile Include="Class\Trajet\DAL_Trajet.cs" />
+    <Compile Include="Class\Trajet\TrajetPage.xaml.cs">
+      <DependentUpon>TrajetPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Class\Ville\Ville.cs" />
+    <Compile Include="Class\Ville\DAL_Ville.cs" />
+    <Compile Include="Class\Vol\DAL_Vol.cs" />
+    <Compile Include="Class\Billet\DAO_Billet.cs" />
+    <Compile Include="Class\Classe\DAO_Classe.cs" />
+    <Compile Include="Class\Employé\DAO_Employe.cs" />
+    <Compile Include="Class\Maintenance\DAO_Maintenance.cs" />
+    <Compile Include="Class\Tarif\DAO_Tarif.cs" />
+    <Compile Include="Class\Aéroport\Aeroport.cs" />
+    <Compile Include="Class\Billet\Billet.cs" />
+    <Compile Include="Class\Classe\Classe.cs" />
+    <Compile Include="Class\Client\Client.cs" />
+    <Compile Include="Class\Avion\DAL_Avion.cs" />
+    <Compile Include="Class\Employé\DAL_Employe.cs" />
+    <Compile Include="Class\Client\DAL_Client.cs" />
+    <Compile Include="Class\Employé\Employe.cs" />
+    <Compile Include="Class\Maintenance\Maintenance.cs" />
+    <Compile Include="Class\Tarif\Tarif.cs" />
+    <Compile Include="Class\Trajet\Trajet.cs" />
+    <Compile Include="Class\Vol\Vol.cs" />
+    <Compile Include="Class\Vol\VolPage.xaml.cs">
+      <DependentUpon>VolPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\BoolExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Class\Client\Utilisateur.cs" />
+    <Compile Include="Class\View\Accueil.xaml.cs">
+      <DependentUpon>Accueil.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Class\View\Connexion.xaml.cs">
+      <DependentUpon>Connexion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Class\View\Inscription.xaml.cs">
+      <DependentUpon>Inscription.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NumericBox.xaml.cs">
       <DependentUpon>NumericBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page1.xaml.cs">
+      <DependentUpon>Page1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page2.xaml.cs">
+      <DependentUpon>Page2.xaml</DependentUpon>
     </Compile>
     <Compile Include="TimeControl.xaml.cs">
       <DependentUpon>TimeControl.xaml</DependentUpon>
     </Compile>
+    <Page Include="Class\Avion\AvionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Class\Aéroport\AeroportPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Class\Client\ClientPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Class\Trajet\TrajetPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Class\View\Accueil.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Class\View\Connexion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Class\View\Inscription.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Class\Vol\VolPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -110,13 +174,21 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Class\Entity\Avion.cs" />
-    <Compile Include="Class\BDD\BDD.cs" />
+    <Compile Include="Class\Avion\Avion.cs" />
+    <Compile Include="BDD\BDD.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="NumericBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Page1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Page2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -143,6 +215,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -150,6 +223,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="LICENSE.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

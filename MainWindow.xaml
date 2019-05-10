@@ -5,6 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+         TextElement.FontWeight="Regular"
+         TextElement.FontSize="13"
+         TextOptions.TextFormattingMode="Ideal"
+         TextOptions.TextRenderingMode="Auto"
+         
         Title="MainWindow" Width="1000" Height="700">
 
     <DockPanel Name="MainLayout">
@@ -26,15 +32,11 @@
             <Button Name="MaintenanceButton" Grid.Column="2" Style="{StaticResource ButtonMenu}" Content="Maintenance" Click="Maintenances" ClickMode="Release" Visibility="Collapsed"/>
             <Button Name="ClientButton" Grid.Column="3" Style="{StaticResource ButtonMenu}" Content="Clients" Click="Clients" ClickMode="Release" Visibility="Collapsed"/>
             <Button Name="ProfilButton" Grid.Column="5" Style="{StaticResource ButtonMenu}" Content="Profil" Click="Profil" ClickMode="Release" Visibility="Collapsed"/>
-            <Button Name="ConnexionButton" Grid.Column="6" Style="{StaticResource ButtonMenu}" Content="Connexion" Click="Connexion" ClickMode="Release"/>
+            <Button Name="ConnexionButton" Grid.Column="6" Style="{StaticResource ButtonMenu}" Content="Connexion" Click="Button_Click" ClickMode="Release"/>
             <Button Name="QuitButton" Grid.Column="7" Style="{StaticResource ButtonMenu}" Content="Quitter" Click="Quitter" ClickMode="Release"/>
         </Grid>
 
-        <GroupBox Name="MainBox" Header="Accueil" DockPanel.Dock="Bottom" FontSize="20">
-            <DockPanel Name="BoxLayout">
-                
-            </DockPanel>
-        </GroupBox>
+        <Frame x:Name="Main" NavigationUIVisibility="Hidden"></Frame>
 
     </DockPanel>
 </Window>
