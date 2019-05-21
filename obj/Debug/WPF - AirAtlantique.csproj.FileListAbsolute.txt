@@ -46,10 +46,6 @@ C:\Users\yoann\source\repos\WpfApp1\WPF - AirAtlantique\bin\Debug\MaterialDesign
 C:\Users\yoann\source\repos\WpfApp1\WPF - AirAtlantique\bin\Debug\MaterialDesignThemes.Wpf.dll
 C:\Users\yoann\source\repos\WpfApp1\WPF - AirAtlantique\bin\Debug\MaterialDesignThemes.Wpf.pdb
 C:\Users\yoann\source\repos\WpfApp1\WPF - AirAtlantique\bin\Debug\MaterialDesignThemes.Wpf.xml
-C:\Users\yoann\source\repos\WpfApp1\WPF - AirAtlantique\obj\Debug\Page1.g.cs
-C:\Users\yoann\source\repos\WpfApp1\WPF - AirAtlantique\obj\Debug\Page1.baml
-C:\Users\yoann\source\repos\WpfApp1\WPF - AirAtlantique\obj\Debug\Page2.g.cs
-C:\Users\yoann\source\repos\WpfApp1\WPF - AirAtlantique\obj\Debug\Page2.baml
 C:\Users\yoann\source\repos\WpfApp1\WPF - AirAtlantique\obj\Debug\App.baml
 C:\Users\yoann\source\repos\WpfApp1\WPF - AirAtlantique\obj\Debug\Class\View\Accueil.g.cs
 C:\Users\yoann\source\repos\WpfApp1\WPF - AirAtlantique\obj\Debug\Class\View\Connexion.g.cs
@@ -70,3 +66,7 @@ C:\Users\yoann\source\repos\WpfApp1\WPF - AirAtlantique\obj\Debug\Class\Avion\Av
 C:\Users\yoann\source\repos\WpfApp1\WPF - AirAtlantique\obj\Debug\Class\Avion\AvionPage.baml
 C:\Users\yoann\source\repos\WpfApp1\WPF - AirAtlantique\obj\Debug\Class\Vol\VolPage.g.cs
 C:\Users\yoann\source\repos\WpfApp1\WPF - AirAtlantique\obj\Debug\Class\Vol\VolPage.baml
+C:\Users\yoann\source\repos\WpfApp1\WPF - AirAtlantique\obj\Debug\Class\TarifVol\TarifVolPage.g.cs
+C:\Users\yoann\source\repos\WpfApp1\WPF - AirAtlantique\obj\Debug\Class\TarifVol\TarifVolPage.baml
+C:\Users\yoann\source\repos\WpfApp1\WPF - AirAtlantique\obj\Debug\Class\Billet\BilletPage.g.cs
+C:\Users\yoann\source\repos\WpfApp1\WPF - AirAtlantique\obj\Debug\Class\Billet\BilletPage.baml

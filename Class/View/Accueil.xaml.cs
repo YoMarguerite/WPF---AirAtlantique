@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1.Class.Avion;
+using WpfApp1.Class.Client;
+using WpfApp1.Class.Vol;
 
 namespace WpfApp1.Class.View
 {
@@ -20,15 +23,34 @@ namespace WpfApp1.Class.View
     /// </summary>
     public partial class Accueil : Page
     {
-        public Accueil()
+        private Frame frame;
+
+        public Accueil(Frame _frame)
         {
             InitializeComponent();
+            frame = _frame;
         }
 
-        private void Vols(object sender, RoutedEventArgs e) { }
+        private void Vols(object sender, RoutedEventArgs e)
+        {
+            frame.Content = new VolPage(frame);
+        }
 
         private void Maintenances(object sender, RoutedEventArgs e) { }
 
-        private void Clients(object sender, RoutedEventArgs e) { }
+        private void Clients(object sender, RoutedEventArgs e)
+        {
+            frame.Content = new ClientPage();
+        }
+
+        private void Avions(object sender, RoutedEventArgs e)
+        {
+            frame.Content = new AvionPage();
+        }
+
+        private void Aeroports(object sender, RoutedEventArgs e)
+        {
+            frame.Content = new AeroportPage();
+        }
     }
 }
