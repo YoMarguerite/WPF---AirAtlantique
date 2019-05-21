@@ -19,6 +19,13 @@
                 <DataGridComboBoxColumn Header="Avion" x:Name="avion" SelectedValueBinding="{Binding Avion}"/>
                 <DataGridTextColumn Header="Départ" Binding="{Binding Depart}"/>
                 <DataGridTextColumn Header="Arrivée" Binding="{Binding Arrivee}"/>
+                <DataGridTemplateColumn Header="Tarifs" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Tarif" Click="Tarif_vol_click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Supprimer" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

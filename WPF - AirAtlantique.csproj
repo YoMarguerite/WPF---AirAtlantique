@@ -76,12 +76,20 @@
       <DependentUpon>AeroportPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Class\Aéroport\DAL_Aeroport.cs" />
+    <Compile Include="Class\Billet\BilletPage.xaml.cs">
+      <DependentUpon>BilletPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Class\Billet\DAL_Billet.cs" />
     <Compile Include="Class\Classe\DAL_Classe.cs" />
     <Compile Include="Class\Client\ClientPage.xaml.cs">
       <DependentUpon>ClientPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Class\Maintenance\DAL_Maintenance.cs" />
+    <Compile Include="Class\TarifVol\DAL_TarifVol.cs" />
+    <Compile Include="Class\TarifVol\TarifVol.cs" />
+    <Compile Include="Class\TarifVol\TarifVolPage.xaml.cs">
+      <DependentUpon>TarifVolPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Class\Tarif\DAL_Tarif.cs" />
     <Compile Include="Class\Trajet\DAL_Trajet.cs" />
     <Compile Include="Class\Trajet\TrajetPage.xaml.cs">
@@ -90,11 +98,8 @@
     <Compile Include="Class\Ville\Ville.cs" />
     <Compile Include="Class\Ville\DAL_Ville.cs" />
     <Compile Include="Class\Vol\DAL_Vol.cs" />
-    <Compile Include="Class\Billet\DAO_Billet.cs" />
-    <Compile Include="Class\Classe\DAO_Classe.cs" />
     <Compile Include="Class\Employé\DAO_Employe.cs" />
     <Compile Include="Class\Maintenance\DAO_Maintenance.cs" />
-    <Compile Include="Class\Tarif\DAO_Tarif.cs" />
     <Compile Include="Class\Aéroport\Aeroport.cs" />
     <Compile Include="Class\Billet\Billet.cs" />
     <Compile Include="Class\Classe\Classe.cs" />
@@ -125,12 +130,6 @@
     <Compile Include="NumericBox.xaml.cs">
       <DependentUpon>NumericBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Page1.xaml.cs">
-      <DependentUpon>Page1.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Page2.xaml.cs">
-      <DependentUpon>Page2.xaml</DependentUpon>
-    </Compile>
     <Compile Include="TimeControl.xaml.cs">
       <DependentUpon>TimeControl.xaml</DependentUpon>
     </Compile>
@@ -142,7 +141,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Class\Billet\BilletPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Class\Client\ClientPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Class\TarifVol\TarifVolPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -184,14 +191,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Page1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Page2.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="TimeControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -227,5 +226,6 @@
   <ItemGroup>
     <Resource Include="LICENSE.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

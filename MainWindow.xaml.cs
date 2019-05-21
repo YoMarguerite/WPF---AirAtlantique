@@ -1,25 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WpfApp1.Class;
-using WpfApp1.Class.Avion;
-using WpfApp1.Class.Client;
-using WpfApp1.Class.Contrôleur;
-using WpfApp1.Class.Entity;
-using WpfApp1.Class.Trajet;
+using WpfApp1.Class.Billet;
+using WpfApp1.Class.TarifVol;
 using WpfApp1.Class.View;
 using WpfApp1.Class.Vol;
 
@@ -48,27 +31,13 @@ namespace WpfApp1
         public MainWindow(){ 
 
             InitializeComponent();
-            //Accueil();
-            Main.Content = new VolPage();
+            Main.Content = new BilletPage(25);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Accueil(object sender, RoutedEventArgs e)
         {
-            Main.Content = new Page1();
+            Main.Content = new Accueil(Main);
         }
-
-        private void Button_Click2(object sender, RoutedEventArgs e)
-        {
-            //jj.Content = new Page2();
-        }
-
-
-        //public void MainBoxPresentation(string header)
-        //{
-        //    MainBox.Header = header;
-        //    BoxLayout.Children.Clear();
-        //    Actif_Controls.Clear();
-        //}
 
         private void Quitter(object sender, RoutedEventArgs e)
         {
@@ -77,46 +46,12 @@ namespace WpfApp1
 
         public void ConnexionValider(Employe _employe)
         {
-            Main.Content = new Accueil();
+            Main.Content = new Accueil(Main);
             user = _employe;
         }
 
-        //private void Accueil()
-        //{
-        //    MainBoxPresentation("Accueil");
 
-        //    ComboBox combo = new ComboBox();
-        //    ComboBox combo2 = new ComboBox();
-        //    DatePicker date = new DatePicker();
-        //    Border errordate = new Border();
-        //    TimeControl time = new TimeControl();
-        //    ComboBox horaire = new ComboBox();
-
-        //    Actif_Controls.Add(combo);
-        //    Actif_Controls.Add(combo2);
-        //    Actif_Controls.Add(date);
-        //    Actif_Controls.Add(errordate);
-        //    Actif_Controls.Add(time);
-        //    Actif_Controls.Add(horaire);
-
-
-        //    //-------------------BoxLayout-----------------
-        //    BoxLayout.Children.Clear();
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Title("RECHERCHER UN VOL"));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Combo(ref combo, "Départ :", "combdepart", aeroports.Nom));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Combo(ref combo2, "Arrivée :", "combarrive", aeroports.Nom));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Date(ref date, "Date :", "date", ref errordate, "errordate", "Date invalide"));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Time(ref time, "Heure :", "heure"));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Combo(ref horaire, "Horaire :", "horaire", new List<string> { "départ à","arrivée à"}));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Button("Recherche", "btnrecherche", Recherche));
-        //}
-
-        private void Accueil(object sender, RoutedEventArgs e)
-        {
-
-        //    Accueil();
-
-        }
+        
 
         //private void Recherche(object sender, RoutedEventArgs e)
         //{
@@ -207,83 +142,6 @@ namespace WpfApp1
         //}
 
 
-
-
-        ////_____________________________UTILISATEURS____________________________
-
-        private void Connexion(object sender, RoutedEventArgs e)
-        { }
-        //    MainBoxPresentation("Connexion");
-
-        //    TextBox mail = new TextBox();
-        //    Border mailerror = new Border();
-        //    PasswordBox password = new PasswordBox();
-        //    Border passerror = new Border();
-
-        //    Actif_Controls.Add(mail);
-        //    Actif_Controls.Add(mailerror);
-        //    Actif_Controls.Add(password);
-        //    Actif_Controls.Add(passerror);
-
-
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Title("CONNEXION"));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Text(ref mail, "Mail :", "txtmail", ref mailerror, "errormail", "Mail invalide"));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Pass(ref password, "Mot de passe :", "txtpass", ref passerror, "errorpass", "Mot de passe invalide"));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Button("Connexion", "btnconnexion", Connexion_Utilisateur));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Btn_Link("Inscription", "btninscription", Inscription));
-
-        //}
-
-        private void Inscription(object sender, RoutedEventArgs e)
-        { }
-        //    MainBoxPresentation("Inscription");
-
-
-        //    TextBox nom = new TextBox();
-        //    Border nomerror = new Border();
-        //    TextBox prenom = new TextBox();
-        //    Border prenomerror = new Border();
-        //    DatePicker date = new DatePicker();
-        //    TextBox adresse = new TextBox();
-        //    TextBox mail = new TextBox();
-        //    Border mailerror = new Border();
-        //    TextBox remail = new TextBox();
-        //    Border remailerror = new Border();
-        //    PasswordBox password = new PasswordBox();
-        //    Border passworderror = new Border();
-        //    PasswordBox repassword = new PasswordBox();
-        //    Border repassworderror = new Border();
-        //    ComboBox civilite = new ComboBox();
-
-
-        //    Actif_Controls.Add(nom);
-        //    Actif_Controls.Add(nomerror);
-        //    Actif_Controls.Add(prenom);
-        //    Actif_Controls.Add(prenomerror);
-        //    Actif_Controls.Add(date);
-        //    Actif_Controls.Add(adresse);
-        //    Actif_Controls.Add(mail);
-        //    Actif_Controls.Add(mailerror);
-        //    Actif_Controls.Add(remail);
-        //    Actif_Controls.Add(remailerror);
-        //    Actif_Controls.Add(password);
-        //    Actif_Controls.Add(passworderror);
-        //    Actif_Controls.Add(repassword);
-        //    Actif_Controls.Add(repassworderror);
-        //    Actif_Controls.Add(civilite);
-
-
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Title("INSCRIPTION"));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Text(ref nom, "Nom :", "txtnom", ref nomerror, "errornom", "Champs invalide"));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Text(ref prenom, "Prénom :", "txtprenom", ref prenomerror,  "errorprenom", "Champs invalide"));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Text(ref mail, "Mail :", "txtmail", ref mailerror, "errormail", "Mail invalide"));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Text(ref remail, "Confirmation :", "txtremail", ref remailerror, "errorremail", "Ne corresponds pas"));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Pass(ref password, "Mot de passe :", "txtpass", ref passworderror, "errorpass", "Mot de passe invalide"));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Pass(ref repassword, "Confirmation :", "txtrepass", ref repassworderror, "errorrepass", "Ne corresponds pas"));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Combo(ref civilite, "Civilite :", "civilite", new List<string> { "Homme", "Femme" }));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Button("Inscription", "btninscription", Inscription_Utilisateur));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Btn_Link("Connexion", "btnconnexion", Connexion));
-        //}
 
         private void Profil(object sender, RoutedEventArgs e)
         { }
@@ -607,8 +465,6 @@ namespace WpfApp1
         //    BoxLayout.Children.Add(datagrid);
         //}
 
-        private void Maintenances(object sender, RoutedEventArgs e)
-        { }
             //{
         //    Maintenances();
         //}
@@ -639,8 +495,6 @@ namespace WpfApp1
         //    BoxLayout.Children.Add(Graphics_Grid.Grid_Button("Ajouter", "btn", Nouvelle_Maintenance));
         //}
 
-        private void Nouvelle_Maintenance(object sender, RoutedEventArgs e)
-        { }
         //{
         //    DatePicker date = (DatePicker)Actif_Controls[0];
         //    Border errordate = (Border)Actif_Controls[1];
@@ -744,384 +598,7 @@ namespace WpfApp1
         //    Maintenances();
         //}
 
-
-
-
-        ////________________________________________VOLS______________________________________
-
-        //private void Vols()
-        //{
-        //    MainBoxPresentation("Vols");
-
-        //    List<string> header = new List<string> { "Depart", "Arrive", "Trajet", "Avion" };
-        //    DataGrid datagrid = Graphics_Grid.DataGrid<Vol>(vols.DataVols, CellEditEndingVol);
-        //    datagrid.Columns.Add(Graphics_Grid.Column(header[0], header[0], false));
-        //    datagrid.Columns.Add(Graphics_Grid.Column(header[1], header[1], false));
-        //    datagrid.Columns.Add(Graphics_Grid.Column(header[2], "Trajet_Str", trajets.Trajets_Str));
-        //    datagrid.Columns.Add(Graphics_Grid.Column(header[3], "Avion", avions.Matricule));
-        //    datagrid.Columns.Add(Graphics_Grid.Column("", "Supprimer", SupprimerVol));
-
-
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Title("Vols"));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Button("Ajouter +", "btn", Ajout_Vol));
-        //    BoxLayout.Children.Add(datagrid);
-        //}
-
-        private void Vols(object sender, RoutedEventArgs e)
-        { }
-        //{
-        //    Vols();
-        //}
-
-        //private void Ajout_Vol(object sender, RoutedEventArgs e)
-        //{
-        //    MainBoxPresentation("Nouveau Vol");
-
-        //    DatePicker date = new DatePicker();
-        //    Border errordate = new Border();
-        //    TimeControl time = new TimeControl();
-        //    DatePicker date2 = new DatePicker();
-        //    Border date2error = new Border();
-        //    TimeControl time2 = new TimeControl();
-        //    ComboBox combo = new ComboBox();
-        //    ComboBox combo2 = new ComboBox();
-
-        //    Actif_Controls.Add(date);
-        //    Actif_Controls.Add(errordate);
-        //    Actif_Controls.Add(time);
-        //    Actif_Controls.Add(date2);
-        //    Actif_Controls.Add(date2error);
-        //    Actif_Controls.Add(time2);
-        //    Actif_Controls.Add(combo);
-        //    Actif_Controls.Add(combo2);
-
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Title("Ajout Vol"));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Date(ref date, "Départ :", "date", ref errordate, "errordate", "Date invalide"));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Time(ref time, "Horaire :", "time"));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Date(ref date2, "Arrivée :", "date2", ref date2error, "errordate2", "Date invalide"));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Time(ref time2, "Horaire :", "time2"));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Combo(ref combo, "Avion :", "combo", avions.Matricule));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Combo(ref combo2, "Trajet :", "combo2", trajets.Trajets_Str));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Button("Ajouter", "btn", Nouveau_Vol));
-        //}
-
-        //private void Nouveau_Vol(object sender, RoutedEventArgs e)
-        //{
-        //    DatePicker date = (DatePicker)Actif_Controls[0];
-        //    Border errordate = (Border)Actif_Controls[1];
-        //    TimeControl time = (TimeControl)Actif_Controls[2];
-        //    DatePicker date2 = (DatePicker)Actif_Controls[3];
-        //    Border errordate2 = (Border)Actif_Controls[4];
-        //    TimeControl time2 = (TimeControl)Actif_Controls[5];
-        //    ComboBox combo = (ComboBox)Actif_Controls[6];
-        //    ComboBox combo2 = (ComboBox)Actif_Controls[7];
-
-        //    bool check = true;
-
-        //    if (date.Text == "")
-        //    {
-        //        errordate.Visibility = Visibility.Visible;
-        //        check = false;
-        //    }
-        //    else
-        //    {
-        //        errordate.Visibility = Visibility.Collapsed;
-        //    }
-
-        //    if (date2.Text == "")
-        //    {
-        //        errordate2.Visibility = Visibility.Visible;
-        //        check = false;
-        //    }
-        //    else
-        //    {
-        //        errordate2.Visibility = Visibility.Collapsed;
-        //    }
-
-        //    if (check)
-        //    {
-        //        Vol vol = new Vol();
-        //        vol.Depart = DateTime.Parse(date.Text+" "+time.Time);
-        //        vol.Arrive = DateTime.Parse(date2.Text+" "+time2.Time);
-        //        vol.Avion = avions.FindByMatricule(combo.Text).Id;
-        //        vol.Trajet = trajets.FindByStr(combo2.Text).Id;
-
-        //        vols.Nouveau(vol);
-
-        //        Vols();
-        //    }
-        //}
-
-        //private void CellEditEndingVol(object sender, DataGridCellEditEndingEventArgs e)
-        //{
-        //    if (e.EditAction == DataGridEditAction.Commit)
-        //    {
-        //        DataGridColumn column = e.Column;
-        //        if (column != null)
-        //        {
-        //            string column_nom = (string)column.Header;
-        //            int rowIndex = e.Row.GetIndex();
-        //            TextBox el = e.EditingElement as TextBox;
-        //            ComboBox el_combo = e.EditingElement as ComboBox;
-        //            Vol vol = vols.Vol[rowIndex];
-        //            DateTime dateTime;
-
-        //            switch (column_nom)
-        //            {
-        //                case "Depart":
-        //                    if (DateTime.TryParse(el.Text, out dateTime))
-        //                    {
-        //                        vols.ChangeDepart(ref vol, el.Text);
-        //                    }
-        //                    else
-        //                    {
-        //                        el.Text = vol.Depart.ToString();
-        //                    }
-        //                    break;
-        //                case "Arrive":
-        //                    if (DateTime.TryParse(el.Text, out dateTime))
-        //                    {
-        //                        vols.ChangeArrive(vol, el.Text);
-        //                    }
-        //                    else
-        //                    {
-        //                        el.Text = vol.Depart.ToString();
-        //                    }
-        //                    break;
-        //                case "Trajet":
-        //                    vols.ChangeTrajet(vol, trajets.FindByStr(el_combo.Text));
-        //                    break;
-        //                case "Avion":
-        //                    vols.ChangeAvion(vol, avions.FindByMatricule(el_combo.Text));
-        //                    break;
-        //                default:
-        //                    break;
-        //            }
-        //        }
-        //    }
-        //}
-
-        //private void SupprimerVol(object sender, RoutedEventArgs e)
-        //{
-        //    int id = int.Parse(((Button)sender).CommandParameter.ToString());
-        //    vols.Supprimer(id);
-        //    Vols();
-        //}
-
-
-
-
-        ////______________________________________CLIENTS__________________________________________
-
-        //private void Clients()
-        //{
-        //    MainBoxPresentation("Clients");
-
-        //    List<string> header = new List<string> { "Nom", "Prenom", "Mail", "Civilite", "Fidelite" };
-        //    DataGrid datagrid = Graphics_Grid.DataGrid<Client>(clients.DataClient, CellEditEndingClient);
-        //    datagrid.Columns.Add(Graphics_Grid.Column(header[0], header[0], false));
-        //    datagrid.Columns.Add(Graphics_Grid.Column(header[1], header[1], false));
-        //    datagrid.Columns.Add(Graphics_Grid.Column(header[2], header[2], false));
-        //    datagrid.Columns.Add(Graphics_Grid.Column(header[3], "Civilite", new List<string> { "Homme", "Femme" }));
-        //    datagrid.Columns.Add(Graphics_Grid.Column(header[4], header[4], false));
-        //    datagrid.Columns.Add(Graphics_Grid.Column("", "Supprimer", SupprimerClient));
-
-
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Title("Clients"));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Button("Ajouter +", "nouveau", Ajout_Client));
-        //    BoxLayout.Children.Add(datagrid);
-        //}
-
-        private void Clients(object sender, RoutedEventArgs e)
-        { }
-        //{
-        //    Clients();
-        //}
-
-        //private void Ajout_Client(object sender, RoutedEventArgs e)
-        //{
-        //    MainBoxPresentation("Nouveau Client");
-
-        //    TextBox nom = new TextBox();
-        //    Border nomerror = new Border();
-        //    TextBox prenom = new TextBox();
-        //    Border prenomerror = new Border();
-        //    TextBox mail = new TextBox();
-        //    Border mailerror = new Border();
-        //    PasswordBox password = new PasswordBox();
-        //    Border passerror = new Border();
-        //    ComboBox civilite = new ComboBox();
-        //    NumericBox fidelite = new NumericBox();
-
-        //    Actif_Controls.Add(nom);
-        //    Actif_Controls.Add(nomerror);
-        //    Actif_Controls.Add(prenom);
-        //    Actif_Controls.Add(prenomerror);
-        //    Actif_Controls.Add(mail);
-        //    Actif_Controls.Add(mailerror);
-        //    Actif_Controls.Add(password);
-        //    Actif_Controls.Add(passerror);
-        //    Actif_Controls.Add(civilite);
-        //    Actif_Controls.Add(fidelite);
-
-
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Title("Ajout Client"));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Text(ref nom, "Nom :", "nom", ref nomerror, "nomerror", "Champs invalide"));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Text(ref prenom, "Prenom :", "prenom", ref prenomerror, "prenomerror", "Champs invalide"));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Text(ref mail, "Mail :", "mail", ref mailerror, "mailerror", "Mail invalide"));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Pass(ref password, "Mot de Passe :", "mdp", ref passerror, "passerror", "Champs invalide"));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Combo(ref civilite, "Civilite :", "civilite", new List<string> { "Homme", "Femme" }));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Number(ref fidelite, "Fidélité :", "fidelite"));
-        //    BoxLayout.Children.Add(Graphics_Grid.Grid_Button("Ajouter", "btn", Nouveau_Client));
-        //}
-
-        //private void Nouveau_Client(object sender, RoutedEventArgs e)
-        //{
-        //    TextBox nom = (TextBox)Actif_Controls[0];
-        //    Border nomerror = (Border)Actif_Controls[1];
-        //    TextBox prenom = (TextBox)Actif_Controls[2];
-        //    Border prenomerror = (Border)Actif_Controls[3];
-        //    TextBox mail = (TextBox)Actif_Controls[4];
-        //    Border mailerror = (Border)Actif_Controls[5];
-        //    PasswordBox password = (PasswordBox)Actif_Controls[6];
-        //    Border passerror = (Border)Actif_Controls[7];
-        //    ComboBox civilite = (ComboBox)Actif_Controls[8];
-        //    NumericBox fidelite = (NumericBox)Actif_Controls[9];
-
-        //    bool check = true;
-
-        //    if (nom.Text == "")
-        //    {
-        //        nomerror.Visibility = Visibility.Visible;
-        //        check = false;
-        //    }
-        //    else
-        //    {
-        //        nomerror.Visibility = Visibility.Collapsed;
-        //    }
-
-        //    if (prenom.Text == "")
-        //    {
-        //        prenomerror.Visibility = Visibility.Visible;
-        //        check = false;
-        //    }
-        //    else
-        //    {
-        //        prenomerror.Visibility = Visibility.Collapsed;
-        //    }
-
-        //    if (!IsValidEmail(mail.Text) && (!clients.ClientExist(mail.Text)))
-        //    {
-        //        mailerror.Visibility = Visibility.Visible;
-        //        check = false;
-        //    }
-        //    else
-        //    {
-        //        mailerror.Visibility = Visibility.Collapsed;
-        //    }
-
-        //    if (password.Password.Length < 8)
-        //    {
-        //        passerror.Visibility = Visibility.Visible;
-        //        check = false;
-        //    }
-        //    else
-        //    {
-        //        passerror.Visibility = Visibility.Collapsed;
-        //    }
-
-        //    if (check)
-        //    {
-        //        Client client = new Client();
-        //        client.Nom = nom.Text;
-        //        client.Prenom = prenom.Text;
-        //        client.Mail = mail.Text;
-        //        client.Civilite = civilite.Text.CiviliteToBoolean();
-        //        client.Fidelite = fidelite.Number;
-
-        //        clients.AjouterClient(client);
-
-        //        Clients();
-        //    }
-        //}
-
-        //private void CellEditEndingClient(object sender, DataGridCellEditEndingEventArgs e)
-        //{
-        //    if (e.EditAction == DataGridEditAction.Commit)
-        //    {
-        //        DataGridColumn column = e.Column;
-        //        if (column != null)
-        //        {
-        //            string column_nom = (string)column.Header;
-        //            int rowIndex = e.Row.GetIndex();
-        //            TextBox el = e.EditingElement as TextBox;
-
-        //            if (rowIndex < clients.Client.Count)
-        //            {
-        //                Utilisateur utilisateur = clients.Client[rowIndex];
-
-        //                switch (column_nom)
-        //                {
-        //                    case "Nom":
-        //                        clients.ChangeNom(utilisateur, el.Text);
-        //                        break;
-
-        //                    case "Prenom":
-        //                        clients.ChangePrenom(utilisateur, el.Text);
-        //                        break;
-
-        //                    case "Mail":
-        //                        if ((IsValidEmail(el.Text) && (!clients.ClientExist(el.Text))))
-        //                        {
-        //                            clients.ChangeMail(utilisateur, el.Text);
-        //                        }
-        //                        else
-        //                        {
-        //                            Client client = (Client)utilisateur;
-        //                            el.Text = client.Mail.ToString();
-        //                        }
-        //                        break;
-
-        //                    case "Civilite":
-        //                        ComboBox el_combo = e.EditingElement as ComboBox;
-        //                        clients.ChangeCivilite(utilisateur, el_combo.Text);
-        //                        break;
-
-        //                    case "Fidelite":
-        //                        if (Numeric(el.Text))
-        //                        {
-        //                            clients.ChangeFidelite(utilisateur, int.Parse(el.Text));
-        //                        }
-        //                        else
-        //                        {
-        //                            Client client = (Client)utilisateur;
-        //                            el.Text = client.Fidelite.ToString();
-        //                        }
-        //                        break;
-
-        //                    default:
-        //                        break;
-        //                }
-        //            }
-        //            else
-        //            {
-
-        //            }
-
-        //        }
-        //    }
-        //}
-
-        //private void SupprimerClient(object sender, RoutedEventArgs e)
-        //{
-        //    int id = int.Parse(((Button)sender).CommandParameter.ToString());
-        //    clients.Supprimer(clients.Find(id));
-        //    Clients();
-        //}
-
-
-
-
+        
         ////___________________________________VERIFICATIONS________________________________________
 
         //private bool IsValidEmail(string email)
