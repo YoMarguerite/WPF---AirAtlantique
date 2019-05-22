@@ -1,163 +1,110 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
-using WpfApp1.Class.Entity;
 
-namespace WpfApp1.Class
+namespace WpfApp1.Class.Maintenance
 {
     class DAL_Maintenance
     {
-        private BDD bdd = new BDD();
+        private static BDD bdd = new BDD();
 
 
-        public int InsertMaintenance(string date, string details, int idavion, int idaeroport)
+        public static ObservableCollection<Maintenance> SelectMaintenances()
         {
-            // Ouverture de la connexion SQL
-            bdd.connection.Open();
-
-            // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = bdd.connection.CreateCommand();
-
-            // Requête SQL
-            cmd.CommandText = "INSERT INTO maintenance (date, details, idavion, idaeroport) " +
-                "VALUES (@date, @details, @avion, @aeroport); SELECT @@Identity as Id";
-
-            // utilisation de l'objet contact passé en paramètre
-            cmd.Parameters.AddWithValue("@date", date);
-            cmd.Parameters.AddWithValue("@details", details);
-            cmd.Parameters.AddWithValue("@avion", idavion);
-            cmd.Parameters.AddWithValue("@aeroport", idaeroport);
-
-            // Exécution de la commande SQL
-            object reader = cmd.ExecuteScalar();
-
-            // Fermeture de la connexion
-            bdd.connection.Close();
-
-            return int.Parse(reader.ToString());
-           
-        }
-
-
-        public List<string[]> SelectMaintenances()
-        {
-            bdd.connection.Open();
-            List<string[]> results = new List<string[]>();
-            string str_maintenance = null;
-
-            // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = bdd.connection.CreateCommand();
-
-            // Requête SQL
-            cmd.CommandText = "SELECT * from maintenance";
-
+            ObservableCollection<Maintenance> Maintenances = new ObservableCollection<Maintenance>();
+            bdd.OpenConnection();
+            string query = "SELECT * FROM Maintenance;";
+            MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
+            cmd.ExecuteNonQuery();
             MySqlDataReader reader = cmd.ExecuteReader();
-
-            if (reader.HasRows)
+            while (reader.Read())
             {
-                while (reader.Read())
-                {
-                    str_maintenance = reader.GetString(0) + ";" + reader.GetString(1) + ";" + reader.GetString(2) + ";" + reader.GetString(3) + ";" + reader.GetString(4);
-                    results.Add(str_maintenance.Split(';'));
-                }
+                Maintenance Maintenance = new Maintenance(reader.GetInt32(0), reader.GetInt32(1), reader.GetDateTime(2), reader.GetInt32(3), reader.GetString(4), reader.GetInt32(5));
+                Maintenances.Add(Maintenance);
             }
-
-            bdd.connection.Close();
-
-            return results;
-
+            reader.Close();
+            bdd.CloseConnection();
+            return Maintenances;
         }
 
-
-        public void UpdateDate(int id, string date)
+        public static ObservableCollection<Maintenance> SelectMaintenancesByEmploye(int employe)
         {
-            bdd.connection.Open();
-
-            // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = bdd.connection.CreateCommand();
-
-            // Requête SQL
-            cmd.CommandText = "UPDATE maintenance SET Date = @Str WHERE idmaintenance=@id";
-            cmd.Parameters.AddWithValue("@Str", date);
-            cmd.Parameters.AddWithValue("@id", id);
-
+            ObservableCollection<Maintenance> Maintenances = new ObservableCollection<Maintenance>();
+            bdd.OpenConnection();
+            string query = "SELECT * FROM Maintenance where responsable_id = @employe;";
+            MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
+            cmd.Parameters.AddWithValue("@employe", employe);
             cmd.ExecuteNonQuery();
-
-            bdd.connection.Close();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                Maintenance Maintenance = new Maintenance(reader.GetInt32(0), reader.GetInt32(1), reader.GetDateTime(2), reader.GetInt32(3), reader.GetString(4), reader.GetInt32(5));
+                Maintenances.Add(Maintenance);
+            }
+            reader.Close();
+            bdd.CloseConnection();
+            return Maintenances;
         }
 
-
-        public void UpdateDetails(int id, string str)
+        public static Maintenance GetMaintenance(int id)
         {
-            bdd.connection.Open();
-
-            // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = bdd.connection.CreateCommand();
-
-            // Requête SQL
-            cmd.CommandText = "UPDATE maintenance SET Details = @Str WHERE idmaintenance=@id";
-            cmd.Parameters.AddWithValue("@Str", str);
+            bdd.OpenConnection();
+            string query = "SELECT * FROM Maintenance WHERE id = @id;";
+            MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.Parameters.AddWithValue("@id", id);
-
             cmd.ExecuteNonQuery();
-
-            bdd.connection.Close();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+            Maintenance Maintenance = new Maintenance(reader.GetInt32(0), reader.GetInt32(1), reader.GetDateTime(2), reader.GetInt32(3), reader.GetString(4), reader.GetInt32(5));
+            reader.Close();
+            bdd.CloseConnection();
+            return Maintenance;
         }
 
-
-        public void UpdateAvion(int id, int id_avion)
+        public static void AjouterMaintenance(int AvionProperty, DateTime DateProperty, int AeroportProperty, string DetailsProperty, int ResponsableProperty)
         {
-            bdd.connection.Open();
-
-            // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = bdd.connection.CreateCommand();
-
-            // Requête SQL
-            cmd.CommandText = "UPDATE maintenance SET idAvion = @Str WHERE idmaintenance=@id";
-            cmd.Parameters.AddWithValue("@Str", id_avion);
-            cmd.Parameters.AddWithValue("@id", id);
-
+            bdd.OpenConnection();
+            string query = "INSERT INTO Maintenance (avion_id, date, aeroport_id, details, responsable_id) VALUES (@avion, @date, @aeroport, @details, @responsable)";
+            MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
+            cmd.Parameters.AddWithValue("@avion", AvionProperty);
+            cmd.Parameters.AddWithValue("@date", DateProperty);
+            cmd.Parameters.AddWithValue("@aeroport", AeroportProperty);
+            cmd.Parameters.AddWithValue("@details", DetailsProperty);
+            cmd.Parameters.AddWithValue("@responsable", ResponsableProperty);
+            MySqlDataAdapter sqlDataAdap = new MySqlDataAdapter(cmd);
             cmd.ExecuteNonQuery();
-
-            bdd.connection.Close();
+            bdd.CloseConnection();
         }
 
-
-        public void UpdateAeroport(int id, int idaeroport)
+        public static void ModifierMaintenance(int IdMaintenanceProperty, int AvionProperty, DateTime DateProperty, int AeroportProperty, string DetailsProperty, int ResponsableProperty)
         {
-            bdd.connection.Open();
-
-            // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = bdd.connection.CreateCommand();
-
-            // Requête SQL
-            cmd.CommandText = "UPDATE maintenance SET idAeroport = @Str WHERE idmaintenance=@id";
-            cmd.Parameters.AddWithValue("@Str", idaeroport);
-            cmd.Parameters.AddWithValue("@id", id);
-
+            bdd.OpenConnection();
+            string query = "UPDATE `Maintenance` SET `avion_id` = @avion, `date` = @date, `aeroport_id` = @aeroport, `details` = @details, `responsable_id` = @responsable WHERE `Maintenance`.`id` = @id;";
+            MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
+            cmd.Parameters.AddWithValue("@avion", AvionProperty);
+            cmd.Parameters.AddWithValue("@date", DateProperty);
+            cmd.Parameters.AddWithValue("@aeroport", AeroportProperty);
+            cmd.Parameters.AddWithValue("@details", DetailsProperty);
+            cmd.Parameters.AddWithValue("@responsable", ResponsableProperty);
+            cmd.Parameters.AddWithValue("@id", IdMaintenanceProperty);
+            MySqlDataAdapter sqlDataAdap = new MySqlDataAdapter(cmd);
             cmd.ExecuteNonQuery();
-
-            bdd.connection.Close();
+            bdd.CloseConnection();
         }
 
-
-        public void Delete(int id)
+        public static void SupprimerMaintenance(int idMaintenance)
         {
-            bdd.connection.Open();
-
-            // Création d'une commande SQL en fonction de l'objet connection
-            MySqlCommand cmd = bdd.connection.CreateCommand();
-
-            // Requête SQL
-            cmd.CommandText = "DELETE FROM maintenance WHERE idmaintenance=@id";
-            cmd.Parameters.AddWithValue("@id", id);
-
+            bdd.OpenConnection();
+            string query = "DELETE FROM Maintenance WHERE id = @id;";
+            MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
+            cmd.Parameters.AddWithValue("@id", idMaintenance);
+            MySqlDataAdapter sqlDataAdap = new MySqlDataAdapter(cmd);
             cmd.ExecuteNonQuery();
-
-            bdd.connection.Close();
+            bdd.CloseConnection();
         }
     }
 }

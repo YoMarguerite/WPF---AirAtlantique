@@ -21,6 +21,13 @@
                 <DataGridComboBoxColumn Header="Civilité" x:Name="civilite" SelectedValueBinding="{Binding Civilite}"/>
                 <DataGridTextColumn Header="Fidélité" Binding="{Binding Fidelite}"/>
                 <DataGridTextColumn Header="Mot de passe" Binding="{Binding Mdp}"/>
+                <DataGridTemplateColumn Header="Billet" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Billet" Click="Billet_client_click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Supprimer" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

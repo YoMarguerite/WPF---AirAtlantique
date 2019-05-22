@@ -24,7 +24,6 @@
             </Grid.ColumnDefinitions>
 
             <Button Name="AccueilButton" Grid.Column="0" Style="{StaticResource Accueil}" Click="Accueil" ClickMode="Release"/>
-            <Button Name="ProfilButton" Grid.Column="6" Style="{StaticResource ButtonMenu}" Content="Profil" Click="Profil" ClickMode="Release" Visibility="Collapsed"/>
             <Button Name="QuitButton" Grid.Column="7" Style="{StaticResource ButtonMenu}" Content="Quitter" Click="Quitter" ClickMode="Release"/>
         </Grid>
 

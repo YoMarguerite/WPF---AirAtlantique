@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using WpfApp1.Class.Employe;
 using WpfApp1.Class.Extensions;
-using WpfApp1.Class.ViewModel;
 
 namespace WpfApp1.Class.View
 {
@@ -11,13 +11,11 @@ namespace WpfApp1.Class.View
     public partial class Connexion : Page
     {
         MainWindow window;
-        DAO_Employe employes;
 
-        public Connexion(MainWindow _window, DAO_Employe _employes)
+        public Connexion(MainWindow _window)
         {
             InitializeComponent();
             window = _window;
-            employes = _employes;
         }
 
         private void Connexion_Utilisateur(object sender, RoutedEventArgs e)
@@ -27,13 +25,14 @@ namespace WpfApp1.Class.View
             
             if (StringExtensions.IsValidEmail(mail.Text))
             {
-                if (employes.VerifierConnexion(mail.Text, password.Password.ToString()))
+                Employe.Employe user = DAL_Employe.GetEmploye(mail.Text, password.Password);
+                if (user == null)
                 {
-                    window.ConnexionValider(employes.Find(mail.Text));
+                    error.Text = "Mail ou Mot de passe incorrect.";
                 }
                 else
                 {
-                    error.Text = "Mail ou Mot de passe incorrect.";
+                    window.ConnexionValider(user);
                 }
             }
             else

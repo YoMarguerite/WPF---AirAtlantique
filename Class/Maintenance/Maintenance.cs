@@ -1,33 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using WpfApp1.Class.Aeroport;
+using WpfApp1.Class.Avion;
 
-namespace WpfApp1.Class.Entity
+namespace WpfApp1.Class.Maintenance
 {
     class Maintenance
     {
         private int id;
-        private string date;
+        private string avion;
+        private DateTime date;
+        private string aeroport;
         private string details;
-        private int avion;
-        private int aeroport;
         private int responsable;
-
-        public Maintenance(int _id, string _date, string _details, int _avion, int _aeroport, int _responsable)
+        
+        public Maintenance(int _id, int _avion, DateTime _date, int _aeroport, string _details, int _responsable)
         {
             this.id = _id;
+            this.avion = DAL_Avion.GetAvion(_avion).Matricule;
             this.date = _date;
+            this.aeroport = DAL_Aeroport.GetAeroport(_aeroport).Nom;
             this.details = _details;
-            this.avion = _avion;
-            this.aeroport = _aeroport;
             this.responsable = _responsable;
         }
-
-        public Maintenance() { }
-
 
         public int Id
         {
@@ -35,28 +29,28 @@ namespace WpfApp1.Class.Entity
             set { id = value; }
         }        
 
-        public string Date
+        public string Avion
+        {
+            get { return avion; }
+            set { avion = value; }
+        }
+
+        public DateTime Date
         {
             get { return date; }
             set { date = value; }
+        }
+
+        public string Aeroport
+        {
+            get { return aeroport; }
+            set { aeroport = value; }
         }
 
         public string Details
         {
             get { return details; }
             set { details = value; }
-        }
-
-        public int Avion
-        {
-            get { return avion; }
-            set { avion = value; }
-        }
-
-        public int Aeroport
-        {
-            get { return aeroport; }
-            set { aeroport = value; }
         }
 
         public int Responsable
