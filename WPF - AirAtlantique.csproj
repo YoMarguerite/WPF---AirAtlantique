@@ -85,6 +85,9 @@
       <DependentUpon>ClientPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Class\Maintenance\DAL_Maintenance.cs" />
+    <Compile Include="Class\Maintenance\MaintenancePage.xaml.cs">
+      <DependentUpon>MaintenancePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Class\TarifVol\DAL_TarifVol.cs" />
     <Compile Include="Class\TarifVol\TarifVol.cs" />
     <Compile Include="Class\TarifVol\TarifVolPage.xaml.cs">
@@ -98,8 +101,6 @@
     <Compile Include="Class\Ville\Ville.cs" />
     <Compile Include="Class\Ville\DAL_Ville.cs" />
     <Compile Include="Class\Vol\DAL_Vol.cs" />
-    <Compile Include="Class\Employé\DAO_Employe.cs" />
-    <Compile Include="Class\Maintenance\DAO_Maintenance.cs" />
     <Compile Include="Class\Aéroport\Aeroport.cs" />
     <Compile Include="Class\Billet\Billet.cs" />
     <Compile Include="Class\Classe\Classe.cs" />
@@ -124,15 +125,6 @@
     <Compile Include="Class\View\Connexion.xaml.cs">
       <DependentUpon>Connexion.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Class\View\Inscription.xaml.cs">
-      <DependentUpon>Inscription.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="NumericBox.xaml.cs">
-      <DependentUpon>NumericBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="TimeControl.xaml.cs">
-      <DependentUpon>TimeControl.xaml</DependentUpon>
-    </Compile>
     <Page Include="Class\Avion\AvionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -149,6 +141,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Class\Maintenance\MaintenancePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Class\TarifVol\TarifVolPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -162,10 +158,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Class\View\Connexion.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Class\View\Inscription.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -187,14 +179,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="NumericBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="TimeControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

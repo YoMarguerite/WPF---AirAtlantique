@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1.Class.Billet;
 using WpfApp1.Class.Extensions;
 
 namespace WpfApp1.Class.Client
@@ -23,12 +24,14 @@ namespace WpfApp1.Class.Client
     public partial class ClientPage : Page
     {
         ObservableCollection<Client> ListeClients;
+        Frame main;
         int IdClient;
 
-        public ClientPage()
+        public ClientPage(Frame _main)
         {
             InitializeComponent();
             AfficherClient();
+            main = _main;
         }
 
         public void AfficherClient()
@@ -108,5 +111,11 @@ namespace WpfApp1.Class.Client
             DAL_Client.SupprimerClient(IdClient);
             AfficherClient();
         }
+
+        private void Billet_client_click(object sender, RoutedEventArgs e)
+        {
+            main.Content = new BilletPage(IdClient);
+        }
+
     }
 }
