@@ -17,7 +17,7 @@ namespace WpfApp1.Class.TarifVol
         {
             ObservableCollection<TarifVol> TarifVols = new ObservableCollection<TarifVol>();
             bdd.OpenConnection();
-            string query = "SELECT * FROM Tarif_Vol;";
+            string query = "SELECT * FROM tarif_vol;";
             MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.ExecuteNonQuery();
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -35,7 +35,7 @@ namespace WpfApp1.Class.TarifVol
         {
             ObservableCollection<TarifVol> TarifVols = new ObservableCollection<TarifVol>();
             bdd.OpenConnection();
-            string query = "SELECT * FROM Tarif_Vol Where vol_id = @vol;";
+            string query = "SELECT * FROM tarif_vol Where vol_id = @vol;";
             MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.Parameters.AddWithValue("@vol", vol);
             cmd.ExecuteNonQuery();
@@ -53,7 +53,7 @@ namespace WpfApp1.Class.TarifVol
         public static TarifVol GetTarifVol(int id)
         {
             bdd.OpenConnection();
-            string query = "SELECT * FROM Tarif_Vol WHERE id = @id;";
+            string query = "SELECT * FROM tarif_vol WHERE id = @id;";
             MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
@@ -68,7 +68,7 @@ namespace WpfApp1.Class.TarifVol
         public static void AjouterTarifVol(int TarifProperty, int VolProperty, float PrixProperty)
         {
             bdd.OpenConnection();
-            string query = "INSERT INTO Tarif_Vol (tarif_id, vol_id, prix) VALUES (@tarif, @vol, @prix)";
+            string query = "INSERT INTO tarif_vol (tarif_id, vol_id, prix) VALUES (@tarif, @vol, @prix)";
             MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.Parameters.AddWithValue("@tarif", TarifProperty);
             cmd.Parameters.AddWithValue("@vol", VolProperty);
@@ -81,7 +81,7 @@ namespace WpfApp1.Class.TarifVol
         public static void ModifierTarifVol(int IdTarifVolProperty, int TarifProperty, int VolProperty, float PrixProperty)
         {
             bdd.OpenConnection();
-            string query = "UPDATE `Tarif_Vol` SET `tarif_id` = @tarif, `vol_id` = @vol, `prix` = @prix WHERE `Tarif_Vol`.`id` = @id;";
+            string query = "UPDATE `tarif_vol` SET `tarif_id` = @tarif, `vol_id` = @vol, `prix` = @prix WHERE `tarif_vol`.`id` = @id;";
             MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.Parameters.AddWithValue("@tarif", TarifProperty);
             cmd.Parameters.AddWithValue("@vol", VolProperty);
@@ -96,7 +96,7 @@ namespace WpfApp1.Class.TarifVol
         public static void SupprimerTarifVol(int idTarifVol)
         {
             bdd.OpenConnection();
-            string query = "DELETE FROM Tarif_Vol WHERE id = @id;";
+            string query = "DELETE FROM tarif_vol WHERE id = @id;";
             MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.Parameters.AddWithValue("@id", idTarifVol);
             MySqlDataAdapter sqlDataAdap = new MySqlDataAdapter(cmd);

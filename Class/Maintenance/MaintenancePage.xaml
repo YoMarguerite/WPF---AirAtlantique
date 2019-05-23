@@ -30,7 +30,7 @@
         </DataGrid>
 
         <StackPanel Grid.Column="1" Orientation="Vertical">
-            <TextBlock Text="Nouveau Vol" FontSize="30"/>
+            <TextBlock Text="Nouvelle Maintenance" FontSize="30"/>
 
             <TextBlock Text="Avion"/>
             <ComboBox Name="Avion"/>

@@ -13,7 +13,7 @@ namespace WpfApp1.Class.Classe
         {
             ObservableCollection<Classe> Classes = new ObservableCollection<Classe>();
             bdd.OpenConnection();
-            string query = "SELECT * FROM Classe;";
+            string query = "SELECT * FROM classe;";
             MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.ExecuteNonQuery();
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -31,7 +31,7 @@ namespace WpfApp1.Class.Classe
         {
             List<string> Classes = new List<string>();
             bdd.OpenConnection();
-            string query = "SELECT * FROM Classe;";
+            string query = "SELECT * FROM classe;";
             MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.ExecuteNonQuery();
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -48,7 +48,7 @@ namespace WpfApp1.Class.Classe
         public static Classe GetClasse(int id)
         {
             bdd.OpenConnection();
-            string query = "SELECT * FROM Classe WHERE id = @id;";
+            string query = "SELECT * FROM classe WHERE id = @id;";
             MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();

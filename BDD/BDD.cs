@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Configuration;
+using System.Windows;
 using MySql.Data.MySqlClient;
 
 namespace WpfApp1.Class
@@ -17,13 +19,14 @@ namespace WpfApp1.Class
         //Initialisation de la connexion à la base de données
         public void InitConnection()
         {
-            string server = "localhost";
-            string database = "airatlantique";
-            string uid = "root";
-            string password = "sohcahtoa";
-            string connectionString;
-            connectionString = "SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
-            connection = new MySqlConnection(connectionString);
+            try
+            {
+                connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["prod"].ConnectionString);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
 
         //Getter de la connexion

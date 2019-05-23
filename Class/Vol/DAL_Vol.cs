@@ -13,7 +13,7 @@ namespace WpfApp1.Class.Vol
         {
             ObservableCollection<Vol> Vols = new ObservableCollection<Vol>();
             bdd.OpenConnection();
-            string query = "SELECT * FROM Vol;";
+            string query = "SELECT * FROM vol;";
             MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.ExecuteNonQuery();
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -30,7 +30,7 @@ namespace WpfApp1.Class.Vol
         public static Vol GetVol(int id)
         {
             bdd.OpenConnection();
-            string query = "SELECT * FROM Vol WHERE id = @id;";
+            string query = "SELECT * FROM vol WHERE id = @id;";
             MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
@@ -45,7 +45,7 @@ namespace WpfApp1.Class.Vol
         public static void AjouterVol(int TrajetProperty, int AvionProperty, DateTime DepartProperty, DateTime ArriveeProperty)
         {
             bdd.OpenConnection();
-            string query = "INSERT INTO Vol (trajet_id, avion_id, depart, arrivee) VALUES (@trajet, @avion, @depart, @arrivee)";
+            string query = "INSERT INTO vol (trajet_id, avion_id, depart, arrivee) VALUES (@trajet, @avion, @depart, @arrivee)";
             MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.Parameters.AddWithValue("@trajet", TrajetProperty);
             cmd.Parameters.AddWithValue("@avion", AvionProperty);
@@ -59,7 +59,7 @@ namespace WpfApp1.Class.Vol
         public static void ModifierVol(int IdVolProperty, int TrajetProperty, int AvionProperty, DateTime DepartProperty, DateTime ArriveeProperty)
         {
             bdd.OpenConnection();
-            string query = "UPDATE `Vol` SET `trajet_id` = @trajet, `avion_id` = @avion, `depart` = @depart, `arrivee` = @arrivee WHERE `Vol`.`id` = @id;";
+            string query = "UPDATE `vol` SET `trajet_id` = @trajet, `avion_id` = @avion, `depart` = @depart, `arrivee` = @arrivee WHERE `vol`.`id` = @id;";
             MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.Parameters.AddWithValue("@trajet", TrajetProperty);
             cmd.Parameters.AddWithValue("@avion", AvionProperty);
@@ -74,7 +74,7 @@ namespace WpfApp1.Class.Vol
         public static void SupprimerVol(int idVol)
         {
             bdd.OpenConnection();
-            string query = "DELETE FROM Vol WHERE id = @id;";
+            string query = "DELETE FROM vol WHERE id = @id;";
             MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.Parameters.AddWithValue("@id", idVol);
             MySqlDataAdapter sqlDataAdap = new MySqlDataAdapter(cmd);

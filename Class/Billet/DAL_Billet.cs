@@ -13,7 +13,7 @@ namespace WpfApp1.Class.Billet
         {
             ObservableCollection<Billet> Billets = new ObservableCollection<Billet>();
             bdd.OpenConnection();
-            string query = "SELECT * FROM Billet;";
+            string query = "SELECT * FROM billet;";
             MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.ExecuteNonQuery();
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -31,7 +31,7 @@ namespace WpfApp1.Class.Billet
         {
             ObservableCollection<Billet> billets = new ObservableCollection<Billet>();
             bdd.OpenConnection();
-            string query = "SELECT * FROM Billet Where user_id = @client;";
+            string query = "SELECT * FROM billet Where user_id = @client;";
             MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.Parameters.AddWithValue("@client", client);
             cmd.ExecuteNonQuery();
@@ -49,7 +49,7 @@ namespace WpfApp1.Class.Billet
         public static Billet GetBillet(int id)
         {
             bdd.OpenConnection();
-            string query = "SELECT * FROM Billet WHERE id = @id;";
+            string query = "SELECT * FROM billet WHERE id = @id;";
             MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
@@ -64,7 +64,7 @@ namespace WpfApp1.Class.Billet
         public static void AjouterBillet(int ClientProperty, int VolProperty, DateTime DateProperty)
         {
             bdd.OpenConnection();
-            string query = "INSERT INTO Billet (user_id, vol_id, date) VALUES (@client, @vol, @date)";
+            string query = "INSERT INTO billet (user_id, vol_id, date) VALUES (@client, @vol, @date)";
             MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.Parameters.AddWithValue("@client", ClientProperty);
             cmd.Parameters.AddWithValue("@vol", VolProperty);
@@ -77,7 +77,7 @@ namespace WpfApp1.Class.Billet
         public static void ModifierBillet(int IdBilletProperty, int ClientProperty, int VolProperty, DateTime DateProperty)
         {
             bdd.OpenConnection();
-            string query = "UPDATE `Billet` SET `user_id` = @client, `vol_id` = @vol, `date` = @date WHERE `Billet`.`id` = @id;";
+            string query = "UPDATE `billet` SET `user_id` = @client, `vol_id` = @vol, `date` = @date WHERE `billet`.`id` = @id;";
             MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.Parameters.AddWithValue("@client", ClientProperty);
             cmd.Parameters.AddWithValue("@vol", VolProperty);
@@ -92,7 +92,7 @@ namespace WpfApp1.Class.Billet
         public static void SupprimerBillet(int idBillet)
         {
             bdd.OpenConnection();
-            string query = "DELETE FROM Billet WHERE id = @id;";
+            string query = "DELETE FROM billet WHERE id = @id;";
             MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.Parameters.AddWithValue("@id", idBillet);
             MySqlDataAdapter sqlDataAdap = new MySqlDataAdapter(cmd);

@@ -13,7 +13,7 @@ namespace WpfApp1.Class.Employe
         public static Employe GetEmploye(string mail, string mdp)
         {
             bdd.OpenConnection();
-            string query = "SELECT * FROM Employe WHERE mail = @mail;";
+            string query = "SELECT * FROM employe WHERE mail = @mail;";
             MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.Parameters.AddWithValue("@mail", mail);
             cmd.ExecuteNonQuery();

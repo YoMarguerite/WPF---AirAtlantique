@@ -18,7 +18,7 @@ namespace WpfApp1.Class.Tarif
         {
             ObservableCollection<Tarif> Tarifs = new ObservableCollection<Tarif>();
             bdd.OpenConnection();
-            string query = "SELECT * FROM Tarif;";
+            string query = "SELECT * FROM tarif;";
             MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.ExecuteNonQuery();
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -36,7 +36,7 @@ namespace WpfApp1.Class.Tarif
         {
             List<string> Tarifs = new List<string>();
             bdd.OpenConnection();
-            string query = "SELECT * FROM Tarif;";
+            string query = "SELECT * FROM tarif;";
             MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.ExecuteNonQuery();
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -54,7 +54,7 @@ namespace WpfApp1.Class.Tarif
         {
             List<string> Tarifs = new List<string>();
             bdd.OpenConnection();
-            string query = "SELECT * FROM Tarif;";
+            string query = "SELECT * FROM tarif;";
             MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.ExecuteNonQuery();
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -72,7 +72,7 @@ namespace WpfApp1.Class.Tarif
         {
             List<string> Tarifs = new List<string>();
             bdd.OpenConnection();
-            string query = "SELECT * FROM Tarif Where classe_id = @classe;";
+            string query = "SELECT * FROM tarif Where classe_id = @classe;";
             MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.Parameters.AddWithValue("@classe", classe);
             cmd.ExecuteNonQuery();
@@ -90,7 +90,7 @@ namespace WpfApp1.Class.Tarif
         public static Tarif GetTarif(int id)
         {
             bdd.OpenConnection();
-            string query = "SELECT * FROM Tarif WHERE id = @id;";
+            string query = "SELECT * FROM tarif WHERE id = @id;";
             MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
@@ -105,7 +105,7 @@ namespace WpfApp1.Class.Tarif
         public static Tarif FindByNameAndClasse(int classe, string nom)
         {
             bdd.OpenConnection();
-            string query = "SELECT * FROM Tarif WHERE classe_id = @classe and tarif = @nom;";
+            string query = "SELECT * FROM tarif WHERE classe_id = @classe and tarif = @nom;";
             MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.Parameters.AddWithValue("@classe", classe);
             cmd.Parameters.AddWithValue("@nom", nom);

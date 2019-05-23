@@ -84,7 +84,7 @@ namespace WpfApp1.Class.Client
         public static void ModifierClient(int IdClientProperty, string MailProperty, bool CiviliteProperty, int FideliteProperty, string UsernameProperty, string FirstnameProperty, string PasswordProperty)
         {
             bdd.OpenConnection();
-            string query = "UPDATE `Client` SET `mail` = @mail, `civilite` = @civilite, `fidelite` = @fidelite, `user_name` = @username, `first_name` = @firstname, `password` = @password WHERE `client`.`id` = @id;";
+            string query = "UPDATE `client` SET `mail` = @mail, `civilite` = @civilite, `fidelite` = @fidelite, `user_name` = @username, `first_name` = @firstname, `password` = @password WHERE `client`.`id` = @id;";
             MySqlCommand cmd = new MySqlCommand(query, bdd.GetConnection());
             cmd.Parameters.AddWithValue("@mail", MailProperty);
             cmd.Parameters.AddWithValue("@civilite", CiviliteProperty);
