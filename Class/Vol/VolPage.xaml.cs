@@ -14,7 +14,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApp1.Class.Avion;
-using WpfApp1.Class.TarifVol;
 using WpfApp1.Class.Trajet;
 
 namespace WpfApp1.Class.Vol
@@ -24,15 +23,13 @@ namespace WpfApp1.Class.Vol
     /// </summary>
     public partial class VolPage : Page
     {
-        private ObservableCollection<Vol> ListeVols;
-        private int IdVol;
-        private Frame frame;
+        ObservableCollection<Vol> ListeVols;
+        int IdVol;
 
-        public VolPage(Frame _frame)
+        public VolPage()
         {
             InitializeComponent();
             AfficherVol();
-            frame = _frame;
         }
 
         public void AfficherVol()
@@ -43,9 +40,7 @@ namespace WpfApp1.Class.Vol
             this.trajet.ItemsSource = DAL_Trajet.SelectStrTrajets();
             this.avion.ItemsSource = DAL_Avion.SelectMatriculeAvions();
             this.Trajet.ItemsSource = DAL_Trajet.SelectStrTrajets();
-            this.Trajet.SelectedValue = DAL_Trajet.SelectStrTrajets().First();
             this.Avion.ItemsSource = DAL_Avion.SelectMatriculeAvions();
-            this.Avion.SelectedValue = DAL_Avion.SelectMatriculeAvions().First();
         }
 
         private void Edit(object sender, DataGridCellEditEndingEventArgs e)
@@ -115,11 +110,6 @@ namespace WpfApp1.Class.Vol
                 DAL_Vol.AjouterVol(DAL_Trajet.FindByStrTrajet(Trajet.Text).Id, DAL_Avion.FindByMatricule(Avion.Text).Id, depart, arrivee);
                 AfficherVol();
             }
-        }
-
-        private void Tarif_vol_click(object sender, RoutedEventArgs e)
-        {
-            frame.Content = new TarifVolPage(IdVol);
         }
 
         private void Supp_vol_click(object sender, RoutedEventArgs e)
