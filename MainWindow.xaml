@@ -18,24 +18,12 @@
         <Grid Background="#ef3026" DockPanel.Dock="Top" Height="30">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="4*" />
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
             <Button Name="AccueilButton" Grid.Column="0" Style="{StaticResource Accueil}" Click="Accueil" ClickMode="Release"/>
-<<<<<<< HEAD
-=======
-            <Button Name="VolsButton" Grid.Column="1" Style="{StaticResource ButtonMenu}" Content="Vols" Click="Vols" ClickMode="Release" Visibility="Collapsed"/>
-            <Button Name="MaintenanceButton" Grid.Column="2" Style="{StaticResource ButtonMenu}" Content="Maintenance" Click="Maintenances" ClickMode="Release" Visibility="Collapsed"/>
-            <Button Name="ClientButton" Grid.Column="3" Style="{StaticResource ButtonMenu}" Content="Clients" Click="Clients" ClickMode="Release" Visibility="Collapsed"/>
-            <Button Name="ProfilButton" Grid.Column="5" Style="{StaticResource ButtonMenu}" Content="Profil" Click="Profil" ClickMode="Release" Visibility="Collapsed"/>
-            <Button Name="ConnexionButton" Grid.Column="6" Style="{StaticResource ButtonMenu}" Content="Connexion" Click="Button_Click" ClickMode="Release"/>
->>>>>>> parent of 5cb955e... ça avance
             <Button Name="QuitButton" Grid.Column="7" Style="{StaticResource ButtonMenu}" Content="Quitter" Click="Quitter" ClickMode="Release"/>
         </Grid>
 

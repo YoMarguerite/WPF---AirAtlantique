@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfApp1.Class.Entity
+namespace WpfApp1.Class.Classe
 {
     class Classe
     {

@@ -24,5 +24,8 @@
         <Button Name="MaintenanceButton" Grid.Row="1" Grid.Column="0" Style="{StaticResource ButtonMenu}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Content="Maintenance" Click="Maintenances" ClickMode="Release"/>
         <Button Name="ClientButton" Grid.Row="2" Grid.Column="0" Style="{StaticResource ButtonMenu}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Content="Clients" Click="Clients" ClickMode="Release"/>
 
+        <Button Name="AvionButton" Grid.Row="0" Grid.Column="1" Style="{StaticResource ButtonMenu}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Content="Avions" Click="Avions" ClickMode="Release"/>
+        <Button Name="AeroportButton" Grid.Row="1" Grid.Column="1" Style="{StaticResource ButtonMenu}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Content="Aéroports" Click="Aeroports" ClickMode="Release"/>
+        
     </Grid>
 </Page>
